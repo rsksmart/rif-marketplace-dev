@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: rif_marketplace_cache
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  rskj:
+    build: ./rskj
+    ports:
+        - 4444:4444
+        - 4445:4445
+        - 30305:30305
+    volumes:
+      - ./data/rskj/database:/var/lib/rsk/database/regtest
+      - ./data/rskj/logs:/var/log/rsk
