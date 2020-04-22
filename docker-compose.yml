@@ -1,11 +1,10 @@
-version: '3.1'
+version: "3.1"
 
 services:
-
   db:
     image: postgres
     restart: always
-    ports: 
+    ports:
       - 5432:5432
     environment:
       POSTGRES_USER: dev
@@ -23,9 +22,14 @@ services:
   rskj:
     build: ./rskj
     ports:
-        - 4444:4444
-        - 4445:4445
-        - 30305:30305
+      - 4444:4444
+      - 4445:4445
+      - 30305:30305
     volumes:
       - ./data/rskj/database:/var/lib/rsk/database/regtest
       - ./data/rskj/logs:/var/log/rsk
+
+  ganache:
+    image: trufflesuite/ganache-cli:latest
+    ports:
+      - 8545:8545
