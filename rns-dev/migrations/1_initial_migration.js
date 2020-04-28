@@ -35,7 +35,7 @@ module.exports = async function(deployer, network) {
   const configuration = {
     rif: rns.rif.options.address,
     rnsDotRskOwner: rns.rskOwner.options.address,
-    rnsReverseRegistrar: rns.reverseRegistrar.options.address,
+    rnsNameResolver: rns.nameResolver.options.address,
     marketplace: marketplaceContract.address
   };
 
