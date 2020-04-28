@@ -4,6 +4,8 @@
 
 - [Docker](https://www.docker.com/)
 - [Docker compose](https://docs.docker.com/compose/install/)
+- [node v10](https://nodejs.org/)
+- npm
 
 ## Usage
 
@@ -32,9 +34,11 @@ docker-compose stop
 
 The folder `./data` contains the current mounted file system for each service:
 
-- /db - current db files
+- /db - current Postgres DB files
+- /ganache
+  - /database - ganache blockchain DB files
 - /rskj
-  - /database - rskj blockchain db files
+  - /database - rskj blockchain DB files
   - /logs - contains the logs
 
 > You can remove the data folder for a fresh start.

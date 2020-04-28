@@ -31,5 +31,10 @@ services:
 
   ganache:
     image: trufflesuite/ganache-cli:latest
+    command:
+      - "-d"
+      - "-- --db /app/database"
     ports:
       - 8545:8545
+    volumes:
+      - ./data/ganache/database:/app/database

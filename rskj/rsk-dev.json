@@ -1,55 +1,51 @@
 {
-    "alloc": {
-      "0000000000000000000000000000000001000006": {
-        "balance": "21000000000000000000000000"
-      },
-  
-      "cd2a3d9f938e13cd947ec05abc7fe734df8dd826": {
-        "balance": "100000000000000000000"
-      },
-      "7986b3df570230288501eea3d890bd66948c9b79": {
-        "balance": "100000000000000000000"
-      },
-      "0a3aa774752ec2042c46548456c094a76c7f3a79": {
-        "balance": "100000000000000000000"
-      },
-      "cf7cdbbb5f7ba79d3ffe74a0bba13fc0295f6036": {
-        "balance": "100000000000000000000"
-      },
-      "39b12c05e8503356e3a7df0b7b33efa4c054c409": {
-        "balance": "100000000000000000000"
-      },
-      "c354d97642faa06781b76ffb6786f72cd7746c97": {
-        "balance": "100000000000000000000"
-      },
-      "debe71e1de41fc77c44df4b6db940026e31b0e71": {
-        "balance": "100000000000000000000"
-      },
-      "7857288e171c6159c5576d1bd9ac40c0c48a771c": {
-        "balance": "100000000000000000000"
-      },
-      "a4dea4d5c954f5fd9e87f0e9752911e83a3d18b3": {
-        "balance": "100000000000000000000"
-      },
-      "09a1eda29f664ac8f68106f6567276df0c65d859": {
-        "balance": "100000000000000000000"
-      },
-      "627306090abab3a6e1400e9345bc60c78a8bef57": {
-        "balance": "100000000000000000000"
-      }
-  
+  "alloc": {
+    "0000000000000000000000000000000001000006": {
+      "balance": "21000000000000000000000000"
     },
-  
-    "nonce": "0xdeadbeefdeadbeef",
-    "mixhash": "0x00",
-    "bitcoinMergedMiningHeader": "0x00",
-    "bitcoinMergedMiningMerkleProof": "0x00",
-    "bitcoinMergedMiningCoinbaseTransaction": "0x00",
-    "timestamp": "0x00",
-    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "extraData": "0x686f727365",
-    "gasLimit": "0x989680",
-    "difficulty": "0x0000000001",
-    "coinbase": "0x3333333333333333333333333333333333333333",
-    "minimumGasPrice": "0x00"
-  }
+
+    "1569048a55C4Af93f2eF3559bE7C4c74Cee730f6": {
+      "balance": "100000000000000000000"
+    },
+    "6c23f017CB6af89e504e64FCBd68392d36f1cC61": {
+      "balance": "100000000000000000000"
+    },
+    "c85acF1739C6f966E6655A9A0c2f5f01DFcF248b": {
+      "balance": "100000000000000000000"
+    },
+    "7acDbEa52CE8588472Be71100CeBee8FcFe77CB6": {
+      "balance": "100000000000000000000"
+    },
+    "dE0f0A64700C9993C306867fE1B0442eEB928B2f": {
+      "balance": "100000000000000000000"
+    },
+    "9F7eB0A139866CC75aB991fb011425952C1cef6a": {
+      "balance": "100000000000000000000"
+    },
+    "F4388EE736159E4fD1CE4d79d085c928C09c88Ba": {
+      "balance": "100000000000000000000"
+    },
+    "9C8C0fE7aca511d5e49C575AadB1D6525bDD4759": {
+      "balance": "100000000000000000000"
+    },
+    "3d615863EdC07772763515E75678598C0c79E2d5": {
+      "balance": "100000000000000000000"
+    },
+    "5612Cf24885e10eC179be531429d223c4c5B0d1A": {
+      "balance": "100000000000000000000"
+    }
+  },
+
+  "nonce": "0xdeadbeefdeadbeef",
+  "mixhash": "0x00",
+  "bitcoinMergedMiningHeader": "0x00",
+  "bitcoinMergedMiningMerkleProof": "0x00",
+  "bitcoinMergedMiningCoinbaseTransaction": "0x00",
+  "timestamp": "0x00",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "extraData": "0x686f727365",
+  "gasLimit": "0x989680",
+  "difficulty": "0x0000000001",
+  "coinbase": "0x3333333333333333333333333333333333333333",
+  "minimumGasPrice": "0x00"
+}

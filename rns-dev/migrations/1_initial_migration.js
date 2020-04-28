@@ -34,15 +34,33 @@ module.exports = async function(deployer, network) {
 
   const configuration = {
     rif: rns.rif.options.address,
-    rns: rns.rskOwner.options.address,
+    rnsDotRskOwner: rns.rskOwner.options.address,
+    rnsReverseRegistrar: rns.reverseRegistrar.options.address,
     marketplace: marketplaceContract.address
   };
 
+  const file = "./out/" + network + ".json";
   await fs.mkdirSync("out", { recursive: true });
-  await fs.writeFileSync(
-    "./out/" + network + ".conf",
-    JSON.stringify(configuration, null, 4)
-  );
-  console.log("Configuration written to file: ", "./out/" + network + ".json");
+  await fs.writeFileSync(file, JSON.stringify(configuration, null, 4));
+
+  console.log("Configuration written to file: ", file);
   console.log(JSON.stringify(configuration, null, 4));
+
+  const rnsAdminConf = "./out/rnsAdmin-" + network + ".json";
+
+  const rnsConfig = {};
+  rnsConfig.rns = rns.rns.options.address;
+  rnsConfig.registrar = rns.auctionRegistrar.options.address;
+  rnsConfig.reverseRegistrar = rns.reverseRegistrar.options.address;
+  rnsConfig.publicResolver = rns.publicResolver.options.address;
+  rnsConfig.nameResolver = rns.nameResolver.options.address;
+  rnsConfig.multiChainResolver = rns.multiChainResolver.options.address;
+  rnsConfig.rif = rns.rif.options.address;
+  rnsConfig.fifsRegistrar = rns.fifsRegistrar.options.address;
+  rnsConfig.fifsAddrRegistrar = rns.fifsAddrRegistrar.options.address;
+  rnsConfig.rskOwner = rns.rskOwner.options.address;
+  rnsConfig.renewer = rns.renewer.options.address;
+  rnsConfig.stringResolver = "0x0000000000000000000000000000000000000000";
+
+  await fs.writeFileSync(rnsAdminConf, JSON.stringify(rnsConfig, null, 4));
 };
