@@ -30,8 +30,7 @@ networks.forEach(network => {
 
   cacheConfig.blockchain.provider = providers[network];
   cacheConfig["rns-owner"].contractAddress = rnsConfig[network].rnsDotRskOwner;
-  cacheConfig["rns-reverse"].contractAddress =
-    rnsConfig[network].rnsReverseRegistrar;
+  cacheConfig["rns-reverse"].contractAddress = rnsConfig[network].nameResolver;
   cacheConfig["rns-placement"].contractAddress = rnsConfig[network].marketplace;
   fs.writeFileSync(outFile, JSON.stringify(cacheConfig, null, 4));
 });

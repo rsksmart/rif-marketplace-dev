@@ -5,7 +5,7 @@
     "provider": "ws://localhost:8545"
   },
   "storage": {
-    "contractAddress": "0x83C5541A6c8D2dBAD642f385d8d06Ca9B6C731ee",
+    "contractAddress": "0x0000000000000000000000000000000000000000",
     "events": ["CapacitySet", "MaximumDurationSet", "PriceSet"],
     "eventsEmitter": {
       "confirmations": 0,
@@ -13,6 +13,7 @@
     }
   },
   "rns-owner": {
+    "contractAddress": "0x0000000000000000000000000000000000000000",
     "events": ["Transfer", "ExpirationChanged"],
     "eventsEmitter": {
       "confirmations": 0,
@@ -23,6 +24,7 @@
     }
   },
   "rns-reverse": {
+    "contractAddress": "0x0000000000000000000000000000000000000000",
     "events": ["NameChanged"],
     "eventsEmitter": {
       "confirmations": 0,
@@ -33,6 +35,7 @@
     }
   },
   "rns-placement": {
+    "contractAddress": "0x0000000000000000000000000000000000000000",
     "events": ["UpdatePlacement"],
     "eventsEmitter": {
       "confirmations": 0,
