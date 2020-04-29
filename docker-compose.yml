@@ -19,15 +19,15 @@ services:
     ports:
       - 8080:8080
 
-  rskj:
-    build: ./rskj
-    ports:
-      - 4444:4444
-      - 4445:4445
-      - 30305:30305
-    volumes:
-      - ./data/rskj/database:/var/lib/rsk/database/regtest
-      - ./data/rskj/logs:/var/log/rsk
+  # rskj:
+  #   build: ./rskj
+  #   ports:
+  #     - 4444:4444
+  #     - 4445:4445
+  #     - 30305:30305
+  #   volumes:
+  #     - ./data/rskj/database:/var/lib/rsk/database/regtest
+  #     - ./data/rskj/logs:/var/log/rsk
 
   ganache:
     image: trufflesuite/ganache-cli:latest

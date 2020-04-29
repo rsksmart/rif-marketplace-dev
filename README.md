@@ -26,13 +26,13 @@ This will download and and run container with following services:
 
 ### Install dependencies for smart contract
 
+**Important: this project only works with node v10**
+
 Before deploying smart contract, please install all the dependencies with:
 
 ```
 sh install.sh
 ```
-
-**Important: this project only works with node v10**
 
 ### Deploy smart contracts
 
@@ -45,7 +45,7 @@ sh deploy.sh
 This will create `./out` folder which contains files:
 
 - `ui-config.json` - the configuration file for the [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui). This contains information for all the networks which are deployed. This should be put in the `rif-marketplace-ui/src/ui-config.json`.
-- `cache-[network]-config.json` - Specific per network configuration file for the [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache) service. The configuration should be in `rif-marketplace-cache/config/local.json`.
+- `cache-[network]-config.json` - Specific per network configuration file for the [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache) service. The configuration should be in `rif-marketplace-cache/config/ganache.json`.
 - `rnsAdmin-[network]-config.json` - Per network conguration file for the [RNS Domains Manager](https://github.com/rnsdomains/rns-manager-react). The configuration should be in `rns-manager-react/src/config/contracts.local.json`.
 
 ## Data folders

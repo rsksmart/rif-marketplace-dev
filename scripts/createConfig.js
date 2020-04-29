@@ -2,8 +2,8 @@ const fs = require("fs");
 
 const rnsConfigPath = "./rns-dev/out/";
 const providers = {
-  ganache: "ws://127.0.0.1:8545/websocket",
-  regtest: "ws://127.0.0.1:4445/websocket"
+  ganache: "ws://127.0.0.1:8545/",
+  regtest: "ws://127.0.0.1:4445/websocket/"
 };
 const networks = ["ganache", "regtest"];
 
