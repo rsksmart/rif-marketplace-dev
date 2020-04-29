@@ -1,0 +1,37 @@
+{
+  "name": "@rsksmart/rif-marketplace-rns-dev-env",
+  "version": "1.0.0",
+  "description": "RNS development environment for RIF marketplace",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsksmart/rif-marketplace-rns-dev-env.git"
+  },
+  "keywords": [
+    "rsk",
+    "rif",
+    "rns",
+    "marketplace",
+    "nfts"
+  ],
+  "author": "Ilan Olkies",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rsksmart/rif-marketplace-rns-dev-env/issues"
+  },
+  "homepage": "https://github.com/rsksmart/rif-marketplace-rns-dev-env#readme",
+  "devDependencies": {
+    "truffle": "^5.1.22"
+  },
+  "dependencies": {
+    "@rsksmart/rif-marketplace-nfts": "0.0.1",
+    "@rsksmart/rns-suite": "^1.0.3",
+    "erc1820": "0.0.2"
+  }
+}
