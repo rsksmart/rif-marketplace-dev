@@ -1,6 +1,7 @@
 {
   "host": "localhost",
   "port": 3030,
+  "persist": true,
   "blockchain": {
     "provider": "ws://localhost:8545"
   },
@@ -12,38 +13,40 @@
       "startingBlock": "genesis"
     }
   },
-  "rns-owner": {
-    "contractAddress": "0x0000000000000000000000000000000000000000",
-    "events": ["Transfer", "ExpirationChanged"],
-    "eventsEmitter": {
-      "confirmations": 0,
-      "startingBlock": "genesis"
+  "rns": {
+    "owner": {
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "events": ["Transfer", "ExpirationChanged"],
+      "eventsEmitter": {
+        "confirmations": 0,
+        "startingBlock": "genesis"
+      },
+      "newBlockEmitter": {
+        "polling": true
+      }
     },
-    "newBlockEmitter": {
-      "polling": false
-    }
-  },
-  "rns-reverse": {
-    "contractAddress": "0x0000000000000000000000000000000000000000",
-    "events": ["NameChanged"],
-    "eventsEmitter": {
-      "confirmations": 0,
-      "startingBlock": "genesis"
+    "reverse": {
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "events": ["NameChanged"],
+      "eventsEmitter": {
+        "confirmations": 0,
+        "startingBlock": "genesis"
+      },
+      "newBlockEmitter": {
+        "polling": true
+      }
     },
-    "newBlockEmitter": {
-      "polling": false
-    }
-  },
-  "rns-placement": {
-    "contractAddress": "0x0000000000000000000000000000000000000000",
-    "events": ["UpdatePlacement"],
-    "eventsEmitter": {
-      "confirmations": 0,
-      "startingBlock": "genesis"
-    },
-    "newBlockEmitter": {
-      "polling": false
-    }
+    "placement": {
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "events": ["UpdatePlacement"],
+      "eventsEmitter": {
+        "confirmations": 0,
+        "startingBlock": "genesis"
+      },
+      "newBlockEmitter": {
+        "polling": true
+      }
+     } 
   },
   "db": "postgres://dev:dev@localhost/rif_marketplace_cache",
   "log": {
