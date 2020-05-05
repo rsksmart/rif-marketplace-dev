@@ -93,8 +93,6 @@ Download and setup the RIF Marketplace Cache
 git clone git@github.com:rsksmart/rif-marketplace-cache.git
 
 cd rif-marketplace-cache
-
-git checkout feat/rns-entities
 ```
 
 Install the dependencies
