@@ -178,13 +178,6 @@ curl -H "Content-Type: application/json" -X POST --data \
         http://localhost:8545
 ```
 
-## Selling domain
-
-TBD
-
-## Buying domain
-
-TBD
 
 # Troubleshooting
 ### RNS manager missmatch between networks
