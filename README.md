@@ -8,17 +8,15 @@ This project provides an easy to use developers environment for the RIF Marketpl
     - [Part of tutorial](#part-of-tutorial)
 - Setup
     1. Developers Environment
-        1.1. Starting docker
-        1.2. Deploying smart contracts
-        1.3. Browser wallet
-    2. RIF Marketplace Cache
-    3. RIF Marketplace UI
-    4. RNS Manager
+        1.1. [Starting docker](#1.1.-Starting-docker)
+        1.2. [Deploying smart contracts](#1.2.-Deploying-smart-contracts)
+        1.3. [Browser wallet](#1.3.-Browser-wallet)
+    2. [RIF Marketplace Cache](#2.-RIF-Marketplace-Cache)
+    3. [RIF Marketplace UI](#3.RIF-Marketplace-UI)
+    4. [RNS Manager](#4.-RNS-Manager)
 - Using the RIF Marketplace
-    - Registering domains using RNS
-    - Selling domain
-    - Buying domain
-- Troubleshooting
+    - [Registering domains using RNS](#Registering-domains-using-RNS)
+- [Troubleshooting](#Troubleshooting) 
 
 
 # Dependencies
@@ -32,8 +30,8 @@ This project provides an easy to use developers environment for the RIF Marketpl
 These will be installed during the tutorial
 
 3. [RIF Marketplace Developer Environment](https://github.com/rsksmart/rif-marketplace-dev/) project
-4. [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache/tree/feat/rns-entities) project
-5. [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui/tree/feature/buyRnsBlcChn) project
+4. [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache/) project
+5. [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui/) project
 6. [RNS Manager Project](https://github.com/rnsdomains/rns-manager-react)
 
 
@@ -94,7 +92,6 @@ git clone git@github.com:rsksmart/rif-marketplace-cache.git
 
 cd rif-marketplace-cache
 
-git checkout feat/rns-entities
 ```
 
 Install the dependencies
@@ -117,7 +114,6 @@ git clone git@github.com:rsksmart/rif-marketplace-ui.git
 
 cd rif-marketplace-ui
 
-git checkout feature/buyRnsBlcChn
 ```
 
 Install the dependencies
@@ -181,14 +177,6 @@ curl -H "Content-Type: application/json" -X POST --data \
         '{"id":1337,"jsonrpc":"2.0","method":"evm_mine"}' \
         http://localhost:8545
 ```
-
-## Selling domain
-
-TBD
-
-## Buying domain
-
-TBD
 
 # Troubleshooting
 ### RNS manager missmatch between networks
