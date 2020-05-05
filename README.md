@@ -114,8 +114,6 @@ Download and setup the RIF Marketplace UI
 git clone git@github.com:rsksmart/rif-marketplace-ui.git
 
 cd rif-marketplace-ui
-
-git checkout feature/buyRnsBlcChn
 ```
 
 Install the dependencies
