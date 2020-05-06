@@ -8,15 +8,15 @@ This project provides an easy to use developers environment for the RIF Marketpl
     - [Part of tutorial](#part-of-tutorial)
 - Setup
     1. Developers Environment
-        1.1. [Starting docker](#1.1.-Starting-docker)
-        1.2. [Deploying smart contracts](#1.2.-Deploying-smart-contracts)
-        1.3. [Browser wallet](#1.3.-Browser-wallet)
-    2. [RIF Marketplace Cache](#2.-RIF-Marketplace-Cache)
-    3. [RIF Marketplace UI](#3.RIF-Marketplace-UI)
-    4. [RNS Manager](#4.-RNS-Manager)
+        1. [Starting docker](#11-starting-docker)
+        2. [Deploying smart contracts](#12-deploying-smart-contracts)
+        3. [Browser wallet](#13-browser-wallet)
+    2. [RIF Marketplace Cache](#2-rif-marketplace-cache)
+    3. [RIF Marketplace UI](#3-rif-marketplace-ui)
+    4. [RNS Manager](#4-rns-manager)
 - Using the RIF Marketplace
-    - [Registering domains using RNS](#Registering-domains-using-RNS)
-- [Troubleshooting](#Troubleshooting) 
+    - [Registering domains using RNS](#registering-domains-using-rns)
+- [Troubleshooting](#troubleshooting) 
 
 
 # Dependencies
@@ -144,18 +144,6 @@ npm i
 
 Copy the configuration file generated in step [1.2](#1.2.Deploying-smart-contracts) from `rif-marketplace-dev/out/rnsAdmin-ganache-config.json` into `rns-manager-react/src/config/contracts.local.json`.
 
-In the `.env.local`  change the `REACT_APP_ENVIRONMENT_ID` to the network ID of our local ganache. You can find it using this command: 
-```
-curl --location --request POST 'localhost:8545/' \
-     --header 'Content-Type: application/json' \
-     --data-raw '{
-         "jsonrpc":"2.0",
-         "method":"net_version",
-         "params":[],
-         "id":67
-     }'
-```
-
 Now you can start the UI (You may need to switch to another port such as http://localhost:3001 if you are already running the RIF Marketplace UI)
 
 ```
@@ -166,14 +154,9 @@ npm start
 
 ## Registering domains using RNS
 Go through the normal RNS registration flow but each time you make transaction you need to create new block as it requires at least 1 confirmation. You can do that with:
-```
-curl -H "Content-Type: application/json" -X POST --data \
-        '{"id":1337,"jsonrpc":"2.0","method":"evm_increaseTime","params":[60]}' \
-        http://localhost:8545
 
-curl -H "Content-Type: application/json" -X POST --data \
-        '{"id":1337,"jsonrpc":"2.0","method":"evm_mine"}' \
-        http://localhost:8545
+```sh
+sh forward.sh
 ```
 
 # Troubleshooting
