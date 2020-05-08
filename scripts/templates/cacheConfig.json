@@ -38,7 +38,7 @@
     },
     "placement": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
-      "events": ["UpdatePlacement"],
+      "events": ["TokenPlaced", "TokenSold", "TokenUnplaced"],
       "eventsEmitter": {
         "confirmations": 0,
         "startingBlock": "genesis"
