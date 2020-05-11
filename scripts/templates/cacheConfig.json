@@ -1,54 +1,18 @@
 {
-  "host": "localhost",
-  "port": 3030,
-  "persist": true,
   "blockchain": {
-    "provider": "ws://localhost:8545"
-  },
-  "storage": {
-    "contractAddress": "0x0000000000000000000000000000000000000000",
-    "events": ["CapacitySet", "MaximumDurationSet", "PriceSet"],
-    "eventsEmitter": {
-      "confirmations": 0,
-      "startingBlock": "genesis"
-    }
+      "provider": ""
   },
   "rns": {
     "owner": {
-      "contractAddress": "0x0000000000000000000000000000000000000000",
-      "events": ["Transfer", "ExpirationChanged"],
-      "eventsEmitter": {
-        "confirmations": 0,
-        "startingBlock": "genesis"
-      },
-      "newBlockEmitter": {
-        "polling": true
-      }
+      "contractAddress": "0x0000000000000000000000000000000000000000"
     },
     "reverse": {
-      "contractAddress": "0x0000000000000000000000000000000000000000",
-      "events": ["NameChanged"],
-      "eventsEmitter": {
-        "confirmations": 0,
-        "startingBlock": "genesis"
-      },
-      "newBlockEmitter": {
-        "polling": true
-      }
+      "contractAddress": "0x0000000000000000000000000000000000000000"
     },
     "placement": {
-      "contractAddress": "0x0000000000000000000000000000000000000000",
-      "events": ["TokenPlaced", "TokenSold", "TokenUnplaced"],
-      "eventsEmitter": {
-        "confirmations": 0,
-        "startingBlock": "genesis"
-      },
-      "newBlockEmitter": {
-        "polling": true
-      }
+      "contractAddress": "0x0000000000000000000000000000000000000000"
      } 
   },
-  "db": "postgres://dev:dev@localhost/rif_marketplace_cache",
   "log": {
     "level": "debug",
     "path": "./logs"
