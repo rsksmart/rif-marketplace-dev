@@ -19,23 +19,6 @@ const file = "./out/ui-config.json";
 fs.mkdirSync("out", { recursive: true });
 fs.writeFileSync(file, JSON.stringify(rnsConfig, null, 4));
 
-// Create the cache config
-networks.forEach(network => {
-  // We only create config for those networks to which we deployed
-
-  if (!rnsConfig[network]) return;
-
-  const cacheConfig = require("./templates/cacheConfig.json");
-  const outFile = "./out/cache-" + network + "-config.json";
-
-  cacheConfig.blockchain.provider = providers[network];
-  cacheConfig.rns.owner.contractAddress = rnsConfig[network].rnsDotRskOwner;
-  cacheConfig.rns.reverse.contractAddress =
-    rnsConfig[network].rnsNameResolver;
-  cacheConfig.rns.placement.contractAddress = rnsConfig[network].marketplace;
-  fs.writeFileSync(outFile, JSON.stringify(cacheConfig, null, 4));
-});
-
 // Create RNS Admin config
 networks.forEach(network => {
   const configFilePath = rnsConfigPath + "rnsAdmin-" + network + ".json";
@@ -43,4 +26,18 @@ networks.forEach(network => {
 
   const outFile = "./out/rnsAdmin-" + network + "-config.json";
   fs.copyFileSync(configFilePath, outFile);
+
+  // Create the cache config
+  const rnsManagerConfig = JSON.parse(fs.readFileSync(configFilePath));
+
+  const cacheConfig = require("./templates/cacheConfig.json");
+  const cacheOutFile = "./out/cache-" + network + "-config.json";
+
+  cacheConfig.blockchain.provider = providers[network];
+  cacheConfig.rns.registrar.contractAddress = rnsManagerConfig.registrar;
+  cacheConfig.rns.fifsAddrRegistrar.contractAddress = rnsManagerConfig.fifsAddrRegistrar;
+  cacheConfig.rns.owner.contractAddress = rnsManagerConfig.rskOwner;
+  cacheConfig.rns.reverse.contractAddress = rnsManagerConfig.reverseRegistrar;
+  cacheConfig.rns.placement.contractAddress = rnsConfig[network].marketplace;
+  fs.writeFileSync(cacheOutFile, JSON.stringify(cacheConfig, null, 4));
 });
