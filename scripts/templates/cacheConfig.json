@@ -3,6 +3,12 @@
       "provider": ""
   },
   "rns": {
+    "registrar": {
+      "contractAddress": "0x0000000000000000000000000000000000000000"
+    },
+    "fifsAddrRegistrar": {
+      "contractAddress": "0x0000000000000000000000000000000000000000"
+    },
     "owner": {
       "contractAddress": "0x0000000000000000000000000000000000000000"
     },
