@@ -50,10 +50,7 @@ Now you can start docker with
 docker-compose up
 ```
 
-The following services will now run:
-- Postgres DB
-- Admin interface for Postgres on http://localhost:8080
-- Ganache blockchain 
+The Ganache blockchain will now run and it is available to deploy the corresponding Smart Contracts.
 
 
 ### 1.2. Deploying smart contracts
@@ -101,7 +98,17 @@ npm i
 
 Copy the configuration file generated in step [1.2](#1.2.Deploying-smart-contracts) from `rif-marketplace-dev/out/cache-ganache-config.json` into `rif-marketplace-cache/config/local.json`.
 
-Run the cache with
+Create the DB using the following command:
+```
+npm run bin db-sync
+```
+
+Run Precache process for the RNS Service
+```
+npm run bin precache rns
+```
+
+Run the cache for the RNS Service with
 ```
 npm run bin -- start --enable rns --log=debug
 ```
