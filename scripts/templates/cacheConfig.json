@@ -3,21 +3,46 @@
       "provider": ""
   },
   "rns": {
+    "enabled": true,
     "registrar": {
-      "contractAddress": "0x0000000000000000000000000000000000000000"
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "eventsEmitter": {
+        "confirmations": 0
+      }
     },
     "fifsAddrRegistrar": {
-      "contractAddress": "0x0000000000000000000000000000000000000000"
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "eventsEmitter": {
+        "confirmations": 0
+      }
     },
     "owner": {
-      "contractAddress": "0x0000000000000000000000000000000000000000"
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+       "eventsEmitter": {
+        "confirmations": 0
+      },
+      "newBlockEmitter": {
+        "polling": true
+      }
     },
     "reverse": {
-      "contractAddress": "0x0000000000000000000000000000000000000000"
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "eventsEmitter": {
+        "confirmations": 0
+      },
+      "newBlockEmitter": {
+        "polling": true
+      }
     },
     "placement": {
-      "contractAddress": "0x0000000000000000000000000000000000000000"
-     } 
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "eventsEmitter": {
+        "confirmations": 0
+      },
+      "newBlockEmitter": {
+        "polling": true
+      }
+    }
   },
   "log": {
     "level": "debug",

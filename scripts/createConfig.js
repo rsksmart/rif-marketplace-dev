@@ -37,7 +37,7 @@ networks.forEach(network => {
   cacheConfig.rns.registrar.contractAddress = rnsManagerConfig.registrar;
   cacheConfig.rns.fifsAddrRegistrar.contractAddress = rnsManagerConfig.fifsAddrRegistrar;
   cacheConfig.rns.owner.contractAddress = rnsManagerConfig.rskOwner;
-  cacheConfig.rns.reverse.contractAddress = rnsManagerConfig.reverseRegistrar;
+  cacheConfig.rns.reverse.contractAddress = rnsManagerConfig.nameResolver;
   cacheConfig.rns.placement.contractAddress = rnsConfig[network].marketplace;
   fs.writeFileSync(cacheOutFile, JSON.stringify(cacheConfig, null, 4));
 });
