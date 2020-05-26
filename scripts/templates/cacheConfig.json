@@ -7,22 +7,19 @@
     "registrar": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
       "eventsEmitter": {
-        "confirmations": 0,
-        "startingBlock": "genesis"
+        "confirmations": 0
       }
     },
     "fifsAddrRegistrar": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
       "eventsEmitter": {
-        "confirmations": 0,
-        "startingBlock": "genesis"
+        "confirmations": 0
       }
     },
     "owner": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
        "eventsEmitter": {
-        "confirmations": 0,
-        "startingBlock": "genesis"
+        "confirmations": 0
       },
       "newBlockEmitter": {
         "polling": true
@@ -31,8 +28,7 @@
     "reverse": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
       "eventsEmitter": {
-        "confirmations": 0,
-        "startingBlock": "genesis"
+        "confirmations": 0
       },
       "newBlockEmitter": {
         "polling": true
@@ -41,8 +37,7 @@
     "placement": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
       "eventsEmitter": {
-        "confirmations": 0,
-        "startingBlock": "genesis"
+        "confirmations": 0
       },
       "newBlockEmitter": {
         "polling": true
