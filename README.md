@@ -105,7 +105,7 @@ npm run bin db-sync
 
 Run Precache process for the RNS Service
 ```
-npm run bin precache rns
+npm run bin precache rns rates
 ```
 
 Run the cache for the RNS Service with
