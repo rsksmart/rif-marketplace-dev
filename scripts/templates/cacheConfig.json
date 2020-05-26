@@ -3,21 +3,61 @@
       "provider": ""
   },
   "rns": {
+    "enabled": true,
     "registrar": {
-      "contractAddress": "0x0000000000000000000000000000000000000000"
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "eventsEmitter": {
+        "confirmations": 0,
+        "startingBlock": "genesis"
+      }
     },
     "fifsAddrRegistrar": {
-      "contractAddress": "0x0000000000000000000000000000000000000000"
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "eventsEmitter": {
+        "confirmations": 0,
+        "startingBlock": "genesis"
+      }
     },
     "owner": {
-      "contractAddress": "0x0000000000000000000000000000000000000000"
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "events": [
+        "Transfer",
+        "ExpirationChanged"
+      ],
+      "eventsEmitter": {
+        "confirmations": 0,
+        "startingBlock": "genesis"
+      },
+      "newBlockEmitter": {
+        "polling": true
+      }
     },
     "reverse": {
-      "contractAddress": "0x0000000000000000000000000000000000000000"
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "events": [
+        "NameChanged"
+      ],
+      "eventsEmitter": {
+        "confirmations": 0,
+        "startingBlock": "genesis"
+      },
+      "newBlockEmitter": {
+        "polling": true
+      }
     },
     "placement": {
-      "contractAddress": "0x0000000000000000000000000000000000000000"
-     } 
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "events": [
+        "TokenPlaced", "TokenSold", "TokenUnplaced"
+      ],
+      "eventsEmitter": {
+        "confirmations": 0,
+        "startingBlock": "genesis"
+      },
+      "newBlockEmitter": {
+        "polling": true
+      }
+    }
   },
   "log": {
     "level": "debug",
