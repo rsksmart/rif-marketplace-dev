@@ -1,7 +1,11 @@
 {
+  "port": 3030,
   "blockchain": {
       "provider": ""
   },
+  "storage": {
+    "enabled": false 
+  }, 
   "rns": {
     "enabled": true,
     "registrar": {
