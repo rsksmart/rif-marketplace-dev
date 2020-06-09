@@ -54,7 +54,7 @@ The Ganache blockchain will now run and it is available to deploy the correspond
 
 
 ### 1.2. Deploying smart contracts
-First, install the RNS dependencies (make sure to **use node v10**, you can switch using `nvm use 10`). 
+First, install the dependencies (make sure to **use node v10**, you can switch using `nvm use 10`). 
 
 ```
 sh install.sh rns
