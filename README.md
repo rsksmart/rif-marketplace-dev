@@ -62,7 +62,7 @@ sh install.sh rns
 
 Run the deployment script for the RNS and Marketplace contracts deploying to ganache network
 ```
-sh deploy.sh rns
+sh deploy.sh rns storage
 ```
 
 This will create `./out` folder with a number of configuration files:
