@@ -1,9 +1,22 @@
 #!/bin/sh
 
-RNS_DIR="./rns-dev"
+if [[ $# -eq 0 ]] ; then
+    echo 'Please specify the services to install. Services available: "rns" "storage".'
+    exit 1
+fi
+
 BASE_DIR=$(pwd)
 
-# Install dependencies for RNS deployment
-cd "$RNS_DIR"
-rm -rf node_modules package-lock.json
-npm i
+for i in "$@"
+do
+   cd "$BASE_DIR" 
+   if [ $i == "rns" ] || [ $i == "storage" ] ;  then
+        SERVICE_DIR="./"$i"-dev"
+      
+        cd "$SERVICE_DIR"
+        rm -rf node_modules package-lock.json
+        npm i
+   fi
+done
+
+

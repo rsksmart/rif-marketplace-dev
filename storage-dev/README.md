@@ -1,10 +1,6 @@
-# RIF Marketplace - RNS dev env
+# RIF Marketplace - STORAGE dev env
 
-RNS development environment for RIF Marketplace.
-
-## Setup
-
-> Works ok with Node v10.20.1. Install it with `nvm install v10` and `nvm use v10`
+Storage development environment for RIF Marketplace.
 
 ## Run with Ganache
 

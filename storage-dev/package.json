@@ -1,0 +1,37 @@
+{
+  "name": "@rsksmart/rif-marketplace-dev",
+  "version": "1.0.0",
+  "description": "Storage development environment for RIF Marketplace.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsksmart/rif-marketplace-dev.git"
+  },
+  "keywords": [
+    "rsk",
+    "rif",
+    "storage",
+    "marketplace",
+    "ipfs",
+    "swarm",
+    "pinning"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rsksmart/rif-marketplace-dev/issues"
+  },
+  "homepage": "https://github.com/rsksmart/rif-marketplace-dev#readme",
+  "devDependencies": {
+    "truffle": "^5.1.22"
+  },
+  "dependencies": {
+    "@rsksmart/rif-marketplace-storage": "0.1.0-dev.0"
+  }
+}
