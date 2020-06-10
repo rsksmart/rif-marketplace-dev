@@ -16,6 +16,8 @@ const rnsConfig = {};
 const storageConfig = {};
 var rnsAdminFilePath;
         
+fs.mkdirSync("out", { recursive: true });
+
 // Process each network
 networks.forEach(network => {
 
@@ -46,17 +48,16 @@ networks.forEach(network => {
     // Create UI config
     const uiConfig = require("./templates/uiConfig.json");
     const uiOutfile = "./out/ui-config.json";
-    fs.mkdirSync("out", { recursive: true });
     // RNS
     if (rnsConfig[network]) { 
-      uiConfig.rif = rnsConfig[network].rif;
-      uiConfig.rnsDotRskOwner = rnsConfig[network].rnsDotRskOwner;
-      uiConfig.rnsNameResolver = rnsConfig[network].rnsNameResolver;
-      uiConfig.marketplace = rnsConfig[network].marketplace;
+      uiConfig[network].rif = rnsConfig[network].rif;
+      uiConfig[network].rnsDotRskOwner = rnsConfig[network].rnsDotRskOwner;
+      uiConfig[network].rnsNameResolver = rnsConfig[network].rnsNameResolver;
+      uiConfig[network].marketplace = rnsConfig[network].marketplace;
     } 
     // Storage
     if (storageConfig[network])
-      uiConfig.storageManager = storageConfig[network].storageManager;
+      uiConfig[network].storageManager = storageConfig[network].storageManager;
    
     fs.writeFileSync(uiOutfile, JSON.stringify(uiConfig, null, 4));
 
