@@ -1,11 +1,16 @@
 const fs = require("fs");
-
 const Migrations = artifacts.require("Migrations");
 const erc1820 = require("erc1820");
 const RNSSuite = require("@rsksmart/rns-suite");
-const ERC721SimplePlacements = artifacts.require("ERC721SimplePlacements");
+const ProxyFactory = artifacts.require('ProxyFactory');
+const ProxyAdmin = artifacts.require('ProxyAdmin');
+const ERC721SimplePlacementsV1 = artifacts.require('ERC721SimplePlacementsV1');
+const { encodeCall } = require('@openzeppelin/upgrades');
+const assert = require('assert');
+const BytesLib = artifacts.require('BytesLib');
 
-module.exports = async function(deployer, network) {
+
+module.exports = async function(deployer, network, accounts) {
   await deployer.deploy(Migrations);
 
   console.log("Deploying ERC-1820");
@@ -18,12 +23,31 @@ module.exports = async function(deployer, network) {
     ["david", "eve", "frank"]
   );
 
-  console.log("Deploying Simple Placements marketplace");
-  const marketplaceContract = await deployer.deploy(
-    ERC721SimplePlacements,
-    rns.rskOwner.options.address
-  );
+  /****************** DEPLOY SIMPLE PLACEMENTS *************************/
+  
+  const proxyFactory = await deployer.deploy(ProxyFactory);
+  const proxyAdmin = await deployer.deploy(ProxyAdmin);
+  const simplePlacementsV1 = await deployer.deploy(ERC721SimplePlacementsV1);
 
+  const salt = '16';
+  const data = encodeCall('initialize', ['address', 'address'], [ rns.rskOwner.options.address, accounts[0] ]);
+  await proxyFactory.deploy(salt, simplePlacementsV1.address, proxyAdmin.address, data);
+ 
+  const deploymentAddress = await proxyFactory.getDeploymentAddress(salt, accounts[0]);
+  const implementationAddress = await proxyAdmin.getProxyImplementation(deploymentAddress);
+  
+  // Get Marketplace contact through Proxy 
+  const marketplaceContract= await ERC721SimplePlacementsV1.at(deploymentAddress);
+
+  assert.equal(implementationAddress, simplePlacementsV1.address);
+     
+  console.log('Proxy factory: ' + proxyFactory.address);
+  console.log('Proxy admin: ' + proxyAdmin.address);
+  console.log('NFTS Contract implementation: ' + simplePlacementsV1.address);
+  console.log('----------------------------');
+  console.log('Resulting proxy deployment address: ' + deploymentAddress);
+  console.log('Resulting querying implementation address: ' + implementationAddress);
+  
   console.log("Enabling RIF Payments");
   await marketplaceContract.setWhitelistedPaymentToken(
     rns.rif.options.address,
