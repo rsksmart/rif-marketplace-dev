@@ -52,7 +52,6 @@ networks.forEach(network => {
     if (rnsConfig[network]) { 
       uiConfig[network].rif = rnsConfig[network].rif;
       uiConfig[network].rnsDotRskOwner = rnsConfig[network].rnsDotRskOwner;
-      uiConfig[network].rnsNameResolver = rnsConfig[network].rnsNameResolver;
       uiConfig[network].marketplace = rnsConfig[network].marketplace;
     } 
     // Storage
