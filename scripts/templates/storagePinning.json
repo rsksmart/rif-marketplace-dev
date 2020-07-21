@@ -1,0 +1,9 @@
+{
+  "blockchain": {
+    "provider": "",
+    "contractAddress": "",
+    "eventsEmitter": {
+      "confirmations": 0
+    }
+  }
+}
