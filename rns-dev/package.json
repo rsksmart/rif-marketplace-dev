@@ -1,5 +1,5 @@
 {
-  "name": "@rsksmart/rif-marketplace-rns-dev-env",
+  "name": "@rsksmart/rif-marketplace-rns-dev",
   "version": "1.0.0",
   "description": "RNS development environment for RIF marketplace",
   "main": "truffle-config.js",
@@ -30,7 +30,7 @@
     "truffle": "^5.1.22"
   },
   "dependencies": {
-    "@rsksmart/rif-marketplace-nfts": "0.1.0",
+    "@rsksmart/rif-marketplace-nfts": "0.1.2",
     "@rsksmart/rns-suite": "1.1.0",
     "erc1820": "0.0.2",
     "@openzeppelin/upgrades": "2.8.0"

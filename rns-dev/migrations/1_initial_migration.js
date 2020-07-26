@@ -4,11 +4,9 @@ const erc1820 = require("erc1820");
 const RNSSuite = require("@rsksmart/rns-suite");
 const ProxyFactory = artifacts.require('ProxyFactory');
 const ProxyAdmin = artifacts.require('ProxyAdmin');
-const ERC721SimplePlacementsV1 = artifacts.require('ERC721SimplePlacementsV1');
+const RNSSimplePlacementsV1 = artifacts.require('RNSSimplePlacementsV1');
 const { encodeCall } = require('@openzeppelin/upgrades');
 const assert = require('assert');
-const BytesLib = artifacts.require('BytesLib');
-
 
 module.exports = async function(deployer, network, accounts) {
   await deployer.deploy(Migrations);
@@ -27,17 +25,17 @@ module.exports = async function(deployer, network, accounts) {
   
   const proxyFactory = await deployer.deploy(ProxyFactory);
   const proxyAdmin = await deployer.deploy(ProxyAdmin);
-  const simplePlacementsV1 = await deployer.deploy(ERC721SimplePlacementsV1);
+  const simplePlacementsV1 = await deployer.deploy(RNSSimplePlacementsV1);
 
-  const salt = '16';
-  const data = encodeCall('initialize', ['address', 'address'], [ rns.rskOwner.options.address, accounts[0] ]);
+  const salt = '20';
+  const data = encodeCall('initialize', ['address', 'address','address'], [ rns.rskOwner.options.address, accounts[0], rns.rns.options.address ]);
   await proxyFactory.deploy(salt, simplePlacementsV1.address, proxyAdmin.address, data);
  
   const deploymentAddress = await proxyFactory.getDeploymentAddress(salt, accounts[0]);
   const implementationAddress = await proxyAdmin.getProxyImplementation(deploymentAddress);
   
   // Get Marketplace contact through Proxy 
-  const marketplaceContract= await ERC721SimplePlacementsV1.at(deploymentAddress);
+  const marketplaceContract= await RNSSimplePlacementsV1.at(deploymentAddress);
 
   assert.equal(implementationAddress, simplePlacementsV1.address);
      
