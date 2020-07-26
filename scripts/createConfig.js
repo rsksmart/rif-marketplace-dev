@@ -2,7 +2,7 @@ var args = process.argv.slice(2);
 
 // Check at least one service specified
 if (!args.length) {
-  console.log("Please specify the services to deploy. Services available: \"rns\" \"storage\".");  
+  console.log("Please specify the services to deploy. Services available: \"rns\" \"storage\".");
   process.exit();
 }
 
@@ -15,7 +15,7 @@ const networks = ["ganache", "regtest"];
 const rnsConfig = {};
 const storageConfig = {};
 var rnsAdminFilePath;
-        
+
 fs.mkdirSync("out", { recursive: true });
 
 // Process each network
@@ -23,7 +23,7 @@ networks.forEach(network => {
 
   // RNS Config File
   if (args.includes('rns')) {
-    
+
     const rnsConfigPath = "./rns-dev/out/";
     const file = rnsConfigPath + network + ".json";
     if (fs.existsSync(file))
@@ -49,15 +49,15 @@ networks.forEach(network => {
     const uiConfig = require("./templates/uiConfig.json");
     const uiOutfile = "./out/ui-config.json";
     // RNS
-    if (rnsConfig[network]) { 
+    if (rnsConfig[network]) {
       uiConfig[network].rif = rnsConfig[network].rif;
       uiConfig[network].rnsDotRskOwner = rnsConfig[network].rnsDotRskOwner;
       uiConfig[network].marketplace = rnsConfig[network].marketplace;
-    } 
+    }
     // Storage
     if (storageConfig[network])
       uiConfig[network].storageManager = storageConfig[network].storageManager;
-   
+
     fs.writeFileSync(uiOutfile, JSON.stringify(uiConfig, null, 4));
 
 
@@ -65,8 +65,9 @@ networks.forEach(network => {
      const cacheConfig = require("./templates/cacheConfig.json");
      const cacheOutFile = "./out/cache-" + network + "-config.json";
      cacheConfig.blockchain.provider = providers[network];
+
      // RNS
-     if (rnsConfig[network]) { 
+     if (rnsConfig[network]) {
        const rnsManagerConfig = JSON.parse(fs.readFileSync(rnsAdminFilePath));
        cacheConfig.rns.registrar.contractAddress = rnsManagerConfig.registrar;
        cacheConfig.rns.fifsAddrRegistrar.contractAddress = rnsManagerConfig.fifsAddrRegistrar;
@@ -74,10 +75,24 @@ networks.forEach(network => {
        cacheConfig.rns.reverse.contractAddress = rnsManagerConfig.nameResolver;
        cacheConfig.rns.placement.contractAddress = rnsConfig[network].marketplace;
      }
+
      // Storage
-     if (storageConfig[network]) { 
+     if (storageConfig[network]) {
        cacheConfig.storage.contractAddress = storageConfig[network].storageManager;
+
+       // Storage CLI
+       const storageCliConfig = require("./templates/storageCli.json");
+       const storageCliOutFile = "./out/storageCli-" + network + "-config.json";
+       storageCliConfig.provider = providers[network];
+       storageCliConfig.contractAddress = storageConfig[network].storageManager;
+       fs.writeFileSync(storageCliOutFile, JSON.stringify(storageCliConfig, null, 4));
+
+       // Pinning Service
+       const storagePinningConfig = require("./templates/storagePinning.json");
+       const storagePinningOutFile = "./out/storagePinning-" + network + "-config.json";
+       storagePinningConfig.blockchain.provider = providers[network];
+       storagePinningConfig.blockchain.contractAddress = storageConfig[network].storageManager;
+       fs.writeFileSync(storagePinningOutFile, JSON.stringify(storagePinningConfig, null, 4));
      }
      fs.writeFileSync(cacheOutFile, JSON.stringify(cacheConfig, null, 4));
-    
 });
