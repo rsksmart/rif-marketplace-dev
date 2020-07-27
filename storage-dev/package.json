@@ -1,5 +1,5 @@
 {
-  "name": "@rsksmart/rif-marketplace-dev",
+  "name": "@rsksmart/rif-marketplace-storage-dev",
   "version": "1.0.0",
   "description": "Storage development environment for RIF Marketplace.",
   "main": "truffle-config.js",
