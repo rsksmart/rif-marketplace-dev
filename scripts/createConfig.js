@@ -50,14 +50,16 @@ networks.forEach(network => {
     const uiOutfile = "./out/ui-config.json";
     // RNS
     if (rnsConfig[network]) {
-      uiConfig[network].rif = rnsConfig[network].rif;
-      uiConfig[network].rnsDotRskOwner = rnsConfig[network].rnsDotRskOwner;
-      uiConfig[network].marketplace = rnsConfig[network].marketplace;
+      uiConfig[network].contractAddresses.rif = rnsConfig[network].rif;
+      uiConfig[network].contractAddresses.rnsDotRskOwner = rnsConfig[network].rnsDotRskOwner;
+      uiConfig[network].contractAddresses.marketplace = rnsConfig[network].marketplace;
+      uiConfig[network].services.push("rns");
     }
     // Storage
-    if (storageConfig[network])
-      uiConfig[network].storageManager = storageConfig[network].storageManager;
-
+    if (storageConfig[network]) {
+      uiConfig[network].contractAddresses.storageManager = storageConfig[network].storageManager;
+      uiConfig[network].services.push("storage");
+    }
     fs.writeFileSync(uiOutfile, JSON.stringify(uiConfig, null, 4));
 
 
@@ -69,6 +71,7 @@ networks.forEach(network => {
      // RNS
      if (rnsConfig[network]) {
        const rnsManagerConfig = JSON.parse(fs.readFileSync(rnsAdminFilePath));
+       cacheConfig.rns.enabled = true;
        cacheConfig.rns.registrar.contractAddress = rnsManagerConfig.registrar;
        cacheConfig.rns.fifsAddrRegistrar.contractAddress = rnsManagerConfig.fifsAddrRegistrar;
        cacheConfig.rns.owner.contractAddress = rnsManagerConfig.rskOwner;
@@ -78,7 +81,9 @@ networks.forEach(network => {
 
      // Storage
      if (storageConfig[network]) {
-       cacheConfig.storage.contractAddress = storageConfig[network].storageManager;
+       
+      cacheConfig.storage.enabled = true;
+      cacheConfig.storage.contractAddress = storageConfig[network].storageManager;
 
        // Storage CLI
        const storageCliConfig = require("./templates/storageCli.json");

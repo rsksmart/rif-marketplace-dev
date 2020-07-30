@@ -1,16 +1,23 @@
 {
-    "ganache": {
-      "rif": "0x0000000000000000000000000000000000000000",
-      "rnsDotRskOwner": "0x0000000000000000000000000000000000000000",
-      "marketplace": "0x0000000000000000000000000000000000000000",
-      "storageManager": "0x0000000000000000000000000000000000000000",
-      "rnsManagerUrl": "http://localhost:3001"
-    },
-    "rsktestnet": {
-        "rif": "0x0000000000000000000000000000000000000000",
-        "rnsDotRskOwner": "0x0000000000000000000000000000000000000000",
-        "marketplace": "0x0000000000000000000000000000000000000000",
-        "storageManager": "0x0000000000000000000000000000000000000000",
-        "rnsManagerUrl": "https://testnet.manager.rns.rifos.org"
-    }
+  "ganache": {
+      "contractAddresses": {
+          "rif": "0x0000000000000000000000000000000000000000",
+          "rnsDotRskOwner": "0x0000000000000000000000000000000000000000",
+          "marketplace": "0x0000000000000000000000000000000000000000",
+          "storageManager": "0x0000000000000000000000000000000000000000"
+      },
+      "rnsManagerUrl": "http://localhost:3001",
+      "services": []
+  },
+  "rsktestnet": {
+      "contractAddresses": {
+          "rif": "0x0000000000000000000000000000000000000000",
+          "rnsDotRskOwner": "0x0000000000000000000000000000000000000000",
+          "marketplace": "0x0000000000000000000000000000000000000000",
+          "storageManager": "0x0000000000000000000000000000000000000000"
+      },
+      "rnsManagerUrl": "https://testnet.manager.rns.rifos.org",
+      "services": []
+  }
 }
+
