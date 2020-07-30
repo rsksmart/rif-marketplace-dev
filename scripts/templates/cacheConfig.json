@@ -4,47 +4,42 @@
       "provider": ""
   },
   "storage": {
-    "enabled": false 
+    "enabled": false,
+    "contractAddress": "0x0000000000000000000000000000000000000000",
+      "eventsEmitter": {
+        "confirmations": 2
+      }
   }, 
   "rns": {
-    "enabled": true,
+    "enabled": false,
     "registrar": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
       "eventsEmitter": {
-        "confirmations": 0
+        "confirmations": 2
       }
     },
     "fifsAddrRegistrar": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
       "eventsEmitter": {
-        "confirmations": 0
+        "confirmations": 2
       }
     },
     "owner": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
        "eventsEmitter": {
-        "confirmations": 0
-      },
-      "newBlockEmitter": {
-        "polling": true
+        "confirmations": 2
       }
     },
     "reverse": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
       "eventsEmitter": {
-        "confirmations": 0
-      },
-      "newBlockEmitter": {
-        "polling": true
+        "confirmations": 2
       }
     },
     "placement": {
       "contractAddress": "0x0000000000000000000000000000000000000000",
       "eventsEmitter": {
-        "confirmations": 0
-      },
-      "newBlockEmitter": {
-        "polling": true
+        "confirmations": 2
       }
     }
   },
