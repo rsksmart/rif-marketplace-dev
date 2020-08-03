@@ -14,6 +14,8 @@ This project provides an easy to use developers environment for the RIF Marketpl
     2. [RIF Marketplace Cache](#2-rif-marketplace-cache)
     3. [RIF Marketplace UI](#3-rif-marketplace-ui)
     4. [RNS Manager](#4-rns-manager)
+    5. [RIF Storage Development CLI](#5-rif-storage-developmen-cli)
+    6. [RIF Storage Pinning service](#6-rif-storage-pinning-service)
 - Using the RIF Marketplace
     - [Registering domains using RNS](#registering-domains-using-rns)
 - [Troubleshooting](#troubleshooting) 
@@ -159,7 +161,7 @@ Now you can start the UI (You may need to switch to another port such as http://
 npm start
 ```
 
-## 6. RIF Storage Development CLI
+## 5. RIF Storage Development CLI
 
 > This is a development CLI to interact with the Storage SC
 
