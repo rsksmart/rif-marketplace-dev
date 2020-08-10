@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/rsksmart/rif-marketplace-rns-dev-env#readme",
   "devDependencies": {
-    "truffle": "^5.1.22"
+    "truffle": "^5.1.39"
   },
   "dependencies": {
     "@rsksmart/rif-marketplace-nfts": "0.1.2",
