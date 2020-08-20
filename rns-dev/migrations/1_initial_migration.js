@@ -5,6 +5,7 @@ const RNSSuite = require("@rsksmart/rns-suite");
 const ProxyFactory = artifacts.require('ProxyFactory');
 const ProxyAdmin = artifacts.require('ProxyAdmin');
 const RNSSimplePlacementsV1 = artifacts.require('RNSSimplePlacementsV1');
+
 const { encodeCall } = require('@openzeppelin/upgrades');
 const assert = require('assert');
 
@@ -28,7 +29,7 @@ module.exports = async function(deployer, network, accounts) {
   const simplePlacementsV1 = await deployer.deploy(RNSSimplePlacementsV1);
 
   const salt = '20';
-  const data = encodeCall('initialize', ['address', 'address','address'], [ rns.rskOwner.options.address, accounts[0], rns.rns.options.address ]);
+  const data = encodeCall('initialize', ['address', 'address','address', 'address'], [ rns.rskOwner.options.address, accounts[0], rns.rns.options.address, rns.defintiveResolver.options.address]);
   await proxyFactory.deploy(salt, simplePlacementsV1.address, proxyAdmin.address, data);
  
   const deploymentAddress = await proxyFactory.getDeploymentAddress(salt, accounts[0]);
@@ -82,6 +83,7 @@ module.exports = async function(deployer, network, accounts) {
   rnsConfig.fifsAddrRegistrar = rns.fifsAddrRegistrar.options.address;
   rnsConfig.rskOwner = rns.rskOwner.options.address;
   rnsConfig.renewer = rns.renewer.options.address;
+  rnsConfig.definitiveResolver = rns.defintiveResolver.options.address;
   rnsConfig.stringResolver = "0x0000000000000000000000000000000000000000";
 
   await fs.writeFileSync(rnsAdminConf, JSON.stringify(rnsConfig, null, 4));
