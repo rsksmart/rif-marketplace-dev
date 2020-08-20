@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/rsksmart/rif-marketplace-dev#readme",
   "devDependencies": {
-    "truffle": "^5.1.22"
+    "truffle": "^5.1.41"
   },
   "dependencies": {
     "@rsksmart/rif-marketplace-storage": "0.1.0-dev.0"
