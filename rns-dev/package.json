@@ -30,7 +30,7 @@
     "truffle": "^5.1.41"
   },
   "dependencies": {
-    "@rsksmart/rif-marketplace-nfts": "0.1.2",
+    "@rsksmart/rif-marketplace-nfts": "0.1.4",
     "@rsksmart/rns-suite": "1.1.0",
     "erc1820": "0.0.2",
     "@openzeppelin/upgrades": "2.8.0"
