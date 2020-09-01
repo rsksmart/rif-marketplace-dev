@@ -32,6 +32,6 @@
     "truffle": "^5.1.22"
   },
   "dependencies": {
-    "@rsksmart/rif-marketplace-storage": "0.1.0-dev.0"
+    "@rsksmart/rif-marketplace-storage": "0.1.0-dev.1"
   }
 }
