@@ -12,6 +12,12 @@ module.exports = async function(deployer, network) {
     StorageManager
   );
   
+  console.log("Enabling RBTC Payments");
+  await marketplaceContract.setWhitelistedTokens(
+    "0x0000000000000000000000000000000000000000",
+    true
+  );
+  
   const configuration = {
     storageManager: marketplaceContract.address
   };
