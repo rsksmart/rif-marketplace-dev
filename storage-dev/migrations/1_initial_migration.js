@@ -1,6 +1,7 @@
 const fs = require("fs");
 const Migrations = artifacts.require("Migrations");
 const StorageManager = artifacts.require("@rsksmart/rif-marketplace-storage/StorageManager");
+const Staking = artifacts.require("@rsksmart/rif-marketplace-storage/Staking");
 
 module.exports = async function(deployer, network) {
   await deployer.deploy(Migrations);
@@ -18,8 +19,20 @@ module.exports = async function(deployer, network) {
     true
   );
   
+  console.log("Deploying Staking Contract");
+  const stakingContract = await deployer.deploy(
+    Staking, marketplaceContract.address
+  );
+  
+  console.log("Enabling RBTC Payments");
+  await stakingContract.setWhitelistedTokens(
+    "0x0000000000000000000000000000000000000000",
+    true
+  );
+
   const configuration = {
-    storageManager: marketplaceContract.address
+    storageManager: marketplaceContract.address,
+    staking: stakingContract.address
   };
 
   const file = "./out/" + network + ".json";
@@ -33,6 +46,8 @@ module.exports = async function(deployer, network) {
 
   const storageConfig = {};
   storageConfig.storageManager = marketplaceContract.address;
+  storageConfig.staking = stakingContract.address;
+  
   
   await fs.writeFileSync(storageAdminConf, JSON.stringify(storageConfig, null, 4));
 

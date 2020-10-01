@@ -58,6 +58,7 @@ networks.forEach(network => {
     // Storage
     if (storageConfig[network]) {
       uiConfig[network].contractAddresses.storageManager = storageConfig[network].storageManager;
+      uiConfig[network].contractAddresses.storageStaking = storageConfig[network].staking;
       uiConfig[network].services.push("storage");
     }
     fs.writeFileSync(uiOutfile, JSON.stringify(uiConfig, null, 4));
@@ -83,7 +84,8 @@ networks.forEach(network => {
      if (storageConfig[network]) {
        
       cacheConfig.storage.enabled = true;
-      cacheConfig.storage.contractAddress = storageConfig[network].storageManager;
+      cacheConfig.storage.storageManager.contractAddress = storageConfig[network].storageManager;
+      cacheConfig.storage.staking.contractAddress = storageConfig[network].staking;
 
        // Storage CLI
        const storageCliConfig = require("./templates/storageCli.json");

@@ -5,10 +5,18 @@
   },
   "storage": {
     "enabled": false,
-    "contractAddress": "0x0000000000000000000000000000000000000000",
+    "storageManager": {
+      "contractAddress": "0x0000000000000000000000000000000000000000",
       "eventsEmitter": {
         "confirmations": 2
       }
+    },
+    "staking": {
+      "contractAddress": "0x0000000000000000000000000000000000000000",
+      "eventsEmitter": {
+        "confirmations": 2
+      }
+    }
   }, 
   "rns": {
     "enabled": false,
