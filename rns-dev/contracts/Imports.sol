@@ -4,4 +4,4 @@ import "@openzeppelin/upgrades/contracts/upgradeability/ProxyFactory.sol";
 import "@openzeppelin/upgrades/contracts/upgradeability/ProxyAdmin.sol";
 import "@rsksmart/rif-marketplace-nfts/contracts/RNSSimplePlacementsV1.sol";
 
-contract Imports {}
+contract ImportsRNS {}

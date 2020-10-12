@@ -1,7 +1,8 @@
 const fs = require("fs");
+const { deployProxy } = require('@openzeppelin/truffle-upgrades');
 const Migrations = artifacts.require("Migrations");
-const StorageManager = artifacts.require("@rsksmart/rif-marketplace-storage/StorageManager");
-const Staking = artifacts.require("@rsksmart/rif-marketplace-storage/Staking");
+const StorageManager = artifacts.require("StorageManager");
+const Staking = artifacts.require("Staking");
 
 module.exports = async function(deployer, network) {
   await deployer.deploy(Migrations);
@@ -9,9 +10,7 @@ module.exports = async function(deployer, network) {
   console.log("Deploying Storage Suite");
 
   console.log("Deploying Storage Manager Contract");
-  const marketplaceContract = await deployer.deploy(
-    StorageManager
-  );
+  const marketplaceContract = await deployProxy(StorageManager, [], { deployer, unsafeAllowCustomTypes: true });
   
   console.log("Enabling RBTC Payments");
   await marketplaceContract.setWhitelistedTokens(
