@@ -29,9 +29,10 @@
   },
   "homepage": "https://github.com/rsksmart/rif-marketplace-dev#readme",
   "devDependencies": {
+    "@openzeppelin/truffle-upgrades": "^1.1.1",
     "truffle": "^5.1.41"
   },
   "dependencies": {
-    "@rsksmart/rif-marketplace-storage": "0.1.0-dev.2"
+    "@rsksmart/rif-marketplace-storage": "0.1.0-dev.4"
   }
 }
