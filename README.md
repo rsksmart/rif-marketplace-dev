@@ -100,21 +100,19 @@ Install the dependencies
 npm i
 ```
 
-Copy the configuration file generated in step [1.2](#1.2.Deploying-smart-contracts) from `rif-marketplace-dev/out/cache-ganache-config.json` into `rif-marketplace-cache/config/local.json`.
-
 Create the DB using the following command:
 ```
 npm run bin db-sync
 ```
 
-Run Precache process for the RNS Service
+Run Precache process for the RNS Service (for ganache network)
 ```
-npm run bin precache rns rates
+NODE_ENV=ganache npm run bin precache rns rates storage
 ```
 
 Run the cache for the RNS Service with
 ```
-npm run bin -- start --enable rns --log=debug
+NODE_ENV=ganache npm run bin -- start --enable rns storage --log=debug
 ```
 
 ## 3. RIF Marketplace UI
@@ -130,8 +128,6 @@ Install the dependencies
 ```
 npm i
 ```
-
-Copy the configuration file generated in step [1.2](#1.2.Deploying-smart-contracts) from `rif-marketplace-dev/out/ui-config.json` into `rif-marketplace-ui/src/ui-config.json`. (You should replace the file if already exists)
 
 Run the UI (Will be available on http://localhost:3000/)
 ```
