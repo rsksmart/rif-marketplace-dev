@@ -4,7 +4,7 @@ const Migrations = artifacts.require("Migrations");
 const StorageManager = artifacts.require("StorageManager");
 const Staking = artifacts.require("Staking");
 
-module.exports = async function(deployer, network) {
+module.exports = async function(deployer, network, accounts) {
   await deployer.deploy(Migrations);
 
   console.log("Deploying Storage Suite");
@@ -12,18 +12,42 @@ module.exports = async function(deployer, network) {
   console.log("Deploying Storage Manager Contract");
   const marketplaceContract = await deployProxy(StorageManager, [], { deployer, unsafeAllowCustomTypes: true });
   
-  console.log("Enabling RBTC Payments");
+  console.log("Storage Manager - Enabling RBTC Payments");
   await marketplaceContract.setWhitelistedTokens(
     "0x0000000000000000000000000000000000000000",
     true
   );
-  
+
+  console.log("Storage Manager - Whitelisting Provider: " + accounts[0]);
+  await marketplaceContract.setWhitelistedProvider(
+    accounts[0],
+    true
+  );
+
+  console.log("Storage Manager - Whitelisting Provider: " + accounts[1]);
+  await marketplaceContract.setWhitelistedProvider(
+    accounts[1],
+    true
+  );
+
+  console.log("Storage Manager - Whitelisting Provider: " + accounts[2]);
+  await marketplaceContract.setWhitelistedProvider(
+    accounts[2],
+    true
+  );
+
+  console.log("Storage Manager - Whitelisting Provider: " + accounts[3]);
+  await marketplaceContract.setWhitelistedProvider(
+    accounts[3],
+    true
+  );
+
   console.log("Deploying Staking Contract");
   const stakingContract = await deployer.deploy(
     Staking, marketplaceContract.address
   );
   
-  console.log("Enabling RBTC Payments");
+  console.log("Staking - Enabling RBTC Payments");
   await stakingContract.setWhitelistedTokens(
     "0x0000000000000000000000000000000000000000",
     true
