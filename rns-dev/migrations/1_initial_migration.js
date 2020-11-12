@@ -18,8 +18,8 @@ module.exports = async function(deployer, network, accounts) {
   console.log("Deploying RNS Suite");
   const rns = await RNSSuite(
     web3.currentProvider,
-    ["alice", "bob", "charlie"],
-    ["david", "eve", "frank"]
+    [],
+    []
   );
 
   /****************** DEPLOY SIMPLE PLACEMENTS *************************/
