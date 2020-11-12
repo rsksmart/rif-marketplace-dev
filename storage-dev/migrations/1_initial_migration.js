@@ -18,6 +18,12 @@ module.exports = async function(deployer, network, accounts) {
     true
   );
 
+  console.log("Storage Manager - Enabling RIF Payments");
+  await marketplaceContract.setWhitelistedTokens(
+    "0x67B5656d60a809915323Bf2C40A8bEF15A152e3e",
+    true
+  );
+
   console.log("Storage Manager - Whitelisting Provider: " + accounts[0]);
   await marketplaceContract.setWhitelistedProvider(
     accounts[0],
@@ -50,6 +56,12 @@ module.exports = async function(deployer, network, accounts) {
   console.log("Staking - Enabling RBTC Payments");
   await stakingContract.setWhitelistedTokens(
     "0x0000000000000000000000000000000000000000",
+    true
+  );
+
+  console.log("Staking - Enabling RIF Payments");
+  await stakingContract.setWhitelistedTokens(
+    "0x67B5656d60a809915323Bf2C40A8bEF15A152e3e",
     true
   );
 
