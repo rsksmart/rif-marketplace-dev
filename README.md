@@ -102,7 +102,7 @@ npm i
 
 Create the DB using the following command:
 ```
-npm run bin db-sync
+npm run bin -- db-migration --up
 ```
 
 Run Precache process for the RNS Service (for ganache network)
