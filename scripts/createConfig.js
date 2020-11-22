@@ -87,13 +87,6 @@ networks.forEach(network => {
       cacheConfig.storage.storageManager.contractAddress = storageConfig[network].storageManager;
       cacheConfig.storage.staking.contractAddress = storageConfig[network].staking;
 
-       // Storage CLI
-       const storageCliConfig = require("./templates/storageCli.json");
-       const storageCliOutFile = "./out/storageCli-" + network + "-config.json";
-       storageCliConfig.provider = providers[network];
-       storageCliConfig.contractAddress = storageConfig[network].storageManager;
-       fs.writeFileSync(storageCliOutFile, JSON.stringify(storageCliConfig, null, 4));
-
        // Pinning Service
        const storagePinningConfig = require("./templates/storagePinning.json");
        const storagePinningOutFile = "./out/storagePinning-" + network + "-config.json";

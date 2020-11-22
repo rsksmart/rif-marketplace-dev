@@ -14,8 +14,7 @@ This project provides an easy to use developers environment for the RIF Marketpl
     2. [RIF Marketplace Cache](#2-rif-marketplace-cache)
     3. [RIF Marketplace UI](#3-rif-marketplace-ui)
     4. [RNS Manager](#4-rns-manager)
-    5. [RIF Storage Development CLI](#5-rif-storage-developmen-cli)
-    6. [RIF Storage Pinning service](#6-rif-storage-pinning-service)
+    5. [RIF Storage Pinning service](#5-rif-storage-pinning-service)
 - Using the RIF Marketplace
     - [Registering domains using RNS](#registering-domains-using-rns)
 - [Troubleshooting](#troubleshooting) 
@@ -35,7 +34,6 @@ These will be installed during the tutorial
 1. [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache/) project
 1. [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui/) project
 1. [RNS Manager Project](https://github.com/rnsdomains/rns-manager-react)
-1. [RIF Storage Development CLI](https://github.com/rsksmart/rif-storage-cli) project
 1. [RIF Storage Pinning Service](https://github.com/rsksmart/rif-storage-ipfs-pinner/) project
 
 # Setup:
@@ -72,9 +70,7 @@ This will create `./out` folder with a number of configuration files:
 
 - `ui-config.json` - the configuration file for the [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui). This contains information for all the networks which are deployed. This should be put in the `rif-marketplace-ui/src/ui-config.json`.
 - `cache-[network]-config.json` - Specific per network configuration file for the [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache) service. The configuration should be in `rif-marketplace-cache/config/local.json`.
-- `storageCli-[network]-config.json` - Specific per network configuration file for the [RIF Storage Development CLI](https://github.com/rsksmart/rif-storage-cli) project. The configuration should be in `rif-storage-cli/config/local.json`.
 - `rnsAdmin-[network]-config.json` - Per network conguration file for the [RNS Domains Manager](https://github.com/rnsdomains/rns-manager-react). The configuration should be in `rns-manager-react/src/config/contracts.local.json`.
-
 
 
 ### 1.3. Browser wallet
@@ -157,46 +153,8 @@ Now you can start the UI (You may need to switch to another port such as http://
 npm start
 ```
 
-## 5. RIF Storage Development CLI
 
-> This is a development CLI to interact with the Storage SC
-
-The first account `0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1` is used for Provider and the second account `0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b` for Consumer.
-
-Download and setup the CLI
-
-```
-$ git clone git@github.com:rsksmart/rif-storage-cli.git
-$ cd rif-storage-cli
-$ npm i
-```
-
-Copy the `./out/storageCli-[provider]-config.json` to `rif-storage-cli/out/local.json`.
-
-Now you should be able create an Offer with:
-
-```
-$ npm run bin -- offer -c 1000000000 -p 600:10
-```
-
-And Agreement with:
-
-```
-$ npm run bin -- agreement:create -r 600 -s 50 -p 100000 /ipfs/QmcaCNFLMkiEXJJGBdfshnwRXgyyDdjE3aWM7ULme5Mfc1
-```
-
-You can create as many Agreements per Consumer account as you like, but for each Agreement there has to be different hash (the `/ipfs/Qm...` part).
-Also, if you are trying to use this with the Pinning service then you should use hash that the Consumer has pinned, otherwise the Pinning Service will 
-
-You can create new hash for example with (in the Pinning service repo!): 
-
-```
-echo "Testing file $(date)" | npm run ipfs:consumer -- add --stdin-name='test_file.txt'
-```
-
-**See help pages for details on the parameters and additional commands!!!**
-
-## 6. RIF Storage Pinning service
+## 5. RIF Storage Pinning service
 
 > This is a service that listens on blockchain events and when new Agreement is created it pins a file to the configured IPFS node.
 
@@ -215,7 +173,7 @@ Initialize development repos that are placed in `.repos`.  This folder can be an
 $ npm run init
 ```
 
-Span IPFS daemons
+Spawn IPFS daemons
 
 ```
 $ npm run ipfs:consumer daemon
@@ -227,7 +185,7 @@ You can use NPM's scripts `npm run ipfs:consumer` and `npm run ipfs:provider` to
 To interact with pinning service use the `npm run bin` script. To start Pinning service run:
 
 ```
-$ npm run bin -- --offerId 0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1 --log=verbose
+$ npm run bin -- init --offerId=0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1 --log=verbose
 ```
 
 You should see in logs when new Agreements are detected and pinned. You can also use the `npm run ipfs:provider pin ls` to see if the hash was indeed pinned. 
