@@ -1,6 +1,6 @@
 # RIF Marketplace developers guide
 
-This project provides an easy to use developers environment for the RIF Marketplace project.
+This project provides an easy to use developers environment for the **RIF Marketplace** project. It installs all the required components to run the **RNS Name Services** and **Storage Pinning Services**.
 
 ### Table of content:
 - [Dependencies](#dependencies)
@@ -11,10 +11,13 @@ This project provides an easy to use developers environment for the RIF Marketpl
         1. [Starting docker](#11-starting-docker)
         2. [Deploying smart contracts](#12-deploying-smart-contracts)
         3. [Browser wallet](#13-browser-wallet)
-    2. [RIF Marketplace Cache](#2-rif-marketplace-cache)
-    3. [RIF Marketplace UI](#3-rif-marketplace-ui)
-    4. [RNS Manager](#4-rns-manager)
-    5. [RIF Storage Pinning service](#5-rif-storage-pinning-service)
+        4. [IPFS Nodes](#14-ipfs-nodes)
+    2. [RIF Communications Pubsub BootNode](#2-rif-communications-pubsub-bootnode)
+    3. [RIF Marketplace Cache](#3-rif-marketplace-cache)
+    4. [RIF Marketplace Upload Service](#4-rif-marketplace-upload-service)
+    5. [RIF Marketplace UI](#5-rif-marketplace-ui)
+    6. [RNS Manager](#6-rns-manager)
+    7. [RIF Storage Pinning service](#7-rif-storage-pinning-service)
 - Using the RIF Marketplace
     - [Registering domains using RNS](#registering-domains-using-rns)
 - [Troubleshooting](#troubleshooting) 
@@ -31,10 +34,12 @@ This project provides an easy to use developers environment for the RIF Marketpl
 These will be installed during the tutorial
 
 1. [RIF Marketplace Developer Environment](https://github.com/rsksmart/rif-marketplace-dev/) project
+1. [RIF Comms Pubsub BootNode](https://github.com/rsksmart/rif-communications-pubsub-bootnode) project   
 1. [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache/) project
+1. [RIF Marketplace Upload Service](https://github.com/rsksmart/rif-marketplace-upload-service/) project
 1. [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui/) project
 1. [RNS Manager Project](https://github.com/rnsdomains/rns-manager-react)
-1. [RIF Storage Pinning Service](https://github.com/rsksmart/rif-storage-ipfs-pinner/) project
+1. [RIF Storage Pinning Service](https://github.com/rsksmart/rif-storage-pinner/) project
 
 # Setup:
 ## 1. Developers Environment
@@ -71,6 +76,7 @@ This will create `./out` folder with a number of configuration files:
 - `ui-config.json` - the configuration file for the [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui). This contains information for all the networks which are deployed. This should be put in the `rif-marketplace-ui/src/ui-config.json`.
 - `cache-[network]-config.json` - Specific per network configuration file for the [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache) service. The configuration should be in `rif-marketplace-cache/config/local.json`.
 - `rnsAdmin-[network]-config.json` - Per network conguration file for the [RNS Domains Manager](https://github.com/rnsdomains/rns-manager-react). The configuration should be in `rns-manager-react/src/config/contracts.local.json`.
+- `rooms-[network].json` - Rooms attribute for the [RIF Communications Pubsub Bootnode](https://github.com/rsksmart/rif-communications-pubsub-bootnode) configuration file.
 
 
 ### 1.3. Browser wallet
@@ -82,7 +88,66 @@ Now we will add RIF token. Click on `Add Token` -> `Custom Token` and input the 
 
 You can similarly add more accounts to your wallet if needed.
 
-## 2. RIF Marketplace Cache
+### 1.4. IPFS Nodes
+
+Install IPFS. Recommended way is using [ipfs-update](https://github.com/ipfs/ipfs-update) but there are other ways described [here](https://github.com/ipfs/go-ipfs#install) as well. Recommended is to run the latest version but required is at least `0.5.0`.
+
+To complete this setup you will need at least two running instances of **IPFS**. These can be spawned and ran easily through the **RIF Storage Pinning** repository, which will provide two instances already configured and ready to be used by the **RIF Marketplace**.
+
+Download and setup the Pinning service
+```
+$ git clone git@github.com:rsksmart/rif-storage-pinner.git
+$ cd rif-storage-pinner
+$ npm i
+```
+
+Initialize development repos that are placed in `.repos`.  This folder can be anytime removed and the `init` command rerun. All data will be purged though.
+```
+$ npm run init
+```
+
+Spawn IPFS daemons
+```
+$ npm run ipfs:consumer daemon
+$ npm run ipfs:provider daemon
+```
+
+You can use NPM's scripts `npm run ipfs:consumer` and `npm run ipfs:provider` to interact with each IPFS nodes. It has the same commands like `ipfs` command.
+
+You should now have two instances of **IPFS** running on ports `5002` and `5003`.
+
+
+## 2. RIF Communications Pubsub Bootnode
+Download and setup the RIF Communications Pubsub Bootnode
+```
+git clone git@github.com:rsksmart/rif-communications-pubsub-bootnode.git
+
+cd rif-communications-pubsub-bootnode
+```
+
+Install the dependencies
+```
+npm i
+```
+
+Copy the `rooms` attribute from the configuration file generated in step [1.2](#1.2.Deploying-smart-contracts) from `rif-marketplace-dev/out/rooms-ganache.json`. Include this attribute in the `development.json5` file. It should look like:
+```
+{
+  peerId: { ... },
+  rooms: [ "8545:0xddb64fe46a91d46ee29420539fc25fd07c5fea3e:0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+           "8545:0xddb64fe46a91d46ee29420539fc25fd07c5fea3e:0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0",
+           "8545:0xddb64fe46a91d46ee29420539fc25fd07c5fea3e:0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b",
+           "8545:0xddb64fe46a91d46ee29420539fc25fd07c5fea3e:0xE11BA2b4D45Eaed5996Cd0823791E0C93114882d" ]
+}
+```
+
+Run the Pubsub Bootnode with
+```
+NODE_ENV=development npm run start
+```
+
+
+## 3. RIF Marketplace Cache
 Download and setup the RIF Marketplace Cache
 ```
 git clone git@github.com:rsksmart/rif-marketplace-cache.git
@@ -111,7 +176,31 @@ Run the cache for the RNS Service with
 NODE_ENV=ganache npm run bin -- start --enable rns storage --log=debug
 ```
 
-## 3. RIF Marketplace UI
+## 4. RIF Marketplace Upload Service
+Download and setup the RIF Marketplace Upload Service
+```
+git clone git@github.com:rsksmart/rif-marketplace-upload-service.git
+
+cd rif-marketplace-upload-service
+```
+
+Install the dependencies
+```
+npm i
+```
+
+Create the DB using the following command:
+```
+npm run bin -- db-migration --up
+```
+
+Run Upload Service (connected to previously deployed IPFS node)
+```
+NODE_ENV=development npm run bin start -- --log=debug
+```
+
+
+## 5. RIF Marketplace UI
 Download and setup the RIF Marketplace UI
 ```
 git clone git@github.com:rsksmart/rif-marketplace-ui.git
@@ -131,7 +220,7 @@ npm start
 ```
 
 
-## 4. RNS Manager
+## 6. RNS Manager
 Download and setup the RNS Manager
 ```
 git clone git@github.com:rnsdomains/rns-manager-react.git
@@ -154,41 +243,32 @@ npm start
 ```
 
 
-## 5. RIF Storage Pinning service
+## 7. RIF Storage Pinning service
 
 > This is a service that listens on blockchain events and when new Agreement is created it pins a file to the configured IPFS node.
 
-Download and setup the Pinning service
+Download and setup the Pinning service (already done when running **IPFS** nodes)
 ```
-$ git clone git@github.com:rsksmart/rif-storage-ipfs-pinner.git
-$ cd rif-storage-ipfs-pinner
+$ git clone git@github.com:rsksmart/rif-storage-pinner.git
+$ cd rif-storage-pinner
 $ npm i
 ```
 
-Install IPFS. Recommended way is using [ipfs-update](https://github.com/ipfs/ipfs-update) but there are other ways described [here](https://github.com/ipfs/go-ipfs#install) as well. Recommended is to run the latest version but required is at least `0.5.0`.
-
-Initialize development repos that are placed in `.repos`.  This folder can be anytime removed and the `init` command rerun. All data will be purged though.
-
-```
-$ npm run init
-```
-
-Spawn IPFS daemons
-
-```
-$ npm run ipfs:consumer daemon
-$ npm run ipfs:provider daemon
-```
-
-You can use NPM's scripts `npm run ipfs:consumer` and `npm run ipfs:provider` to interact with each IPFS nodes. It has the same commands like `ipfs` command.
+Make sure you have **IPFS** installed. We will use one of the previously deployed instances of **IPFS**.
 
 To interact with pinning service use the `npm run bin` script. To start Pinning service run:
 
 ```
-$ npm run bin -- init --offerId=0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1 --log=verbose
+npm run bin -- init --offerId=0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1 --db=./db.sqlite
 ```
 
-You should see in logs when new Agreements are detected and pinned. You can also use the `npm run ipfs:provider pin ls` to see if the hash was indeed pinned. 
+This will provide the `peerId` that should be used in the *RIF Marketplace UI*  to create the Storage offer. Once the offer is created in the UI you can run the service using:
+
+```
+NODE_ENV=ganache npm run bin daemon -- --log=debug --db=./db.sqlite
+```
+
+You should see in logs when new Agreements are detected and pinned. 
 
 **See help pages for details on the parameters and additional commands!!!**
 
