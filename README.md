@@ -29,6 +29,9 @@ This project provides an easy to use developers environment for the **RIF Market
 0. node v10 (or [nvm](https://github.com/nvm-sh/nvm) with node v10 installed)
 1. [Docker](https://www.docker.com/)
 2. [Docker compose](https://docs.docker.com/compose/install/)
+3. [IPFS](https://ipfs.io/) 
+The recommended way to install IPFS is using [ipfs-update](https://github.com/ipfs/ipfs-update) but there are other ways described [here](https://github.com/ipfs/go-ipfs#install) as well. Recommended is to run the latest version but required is at least `0.7.0`.
+
 
 ## Part of tutorial
 These will be installed during the tutorial
@@ -90,15 +93,13 @@ You can similarly add more accounts to your wallet if needed.
 
 ### 1.4. IPFS Nodes
 
-Install IPFS. Recommended way is using [ipfs-update](https://github.com/ipfs/ipfs-update) but there are other ways described [here](https://github.com/ipfs/go-ipfs#install) as well. Recommended is to run the latest version but required is at least `0.5.0`.
-
-To complete this setup you will need at least two running instances of **IPFS**. These can be spawned and ran easily through the **RIF Storage Pinning** repository, which will provide two instances already configured and ready to be used by the **RIF Marketplace**.
+For this setup you will need at least two running instances of **IPFS**. These can be spawned and ran easily through the **RIF Storage Pinning** repository, which will provide two instances already configured and ready to be used by the **RIF Marketplace**.
 
 Download and setup the Pinning service
 ```
 $ git clone git@github.com:rsksmart/rif-storage-pinner.git
 $ cd rif-storage-pinner
-$ npm i
+$ npm ci
 ```
 
 Initialize development repos that are placed in `.repos`.  This folder can be anytime removed and the `init` command rerun. All data will be purged though.
@@ -112,7 +113,7 @@ $ npm run ipfs:consumer daemon
 $ npm run ipfs:provider daemon
 ```
 
-You can use NPM's scripts `npm run ipfs:consumer` and `npm run ipfs:provider` to interact with each IPFS nodes. It has the same commands like `ipfs` command.
+You can use NPM's scripts `npm run ipfs:consumer` and `npm run ipfs:provider` to interact with each IPFS node. These take the same arguments as the `ipfs` command.
 
 You should now have two instances of **IPFS** running on ports `5002` and `5003`.
 
@@ -127,7 +128,7 @@ cd rif-communications-pubsub-bootnode
 
 Install the dependencies
 ```
-npm i
+npm ci
 ```
 
 Copy the `rooms` attribute from the configuration file generated in step [1.2](#1.2.Deploying-smart-contracts) from `rif-marketplace-dev/out/rooms-ganache.json`. Include this attribute in the `development.json5` file. It should look like:
@@ -158,7 +159,7 @@ cd rif-marketplace-cache
 Install the dependencies
 
 ```
-npm i
+npm ci
 ```
 
 Create the DB using the following command:
@@ -186,7 +187,7 @@ cd rif-marketplace-upload-service
 
 Install the dependencies
 ```
-npm i
+npm ci
 ```
 
 Create the DB using the following command:
@@ -211,7 +212,7 @@ cd rif-marketplace-ui
 Install the dependencies
 
 ```
-npm i
+npm ci
 ```
 
 Run the UI (Will be available on http://localhost:3000/)
@@ -251,7 +252,7 @@ Download and setup the Pinning service (already done when running **IPFS** nodes
 ```
 $ git clone git@github.com:rsksmart/rif-storage-pinner.git
 $ cd rif-storage-pinner
-$ npm i
+$ npm ci
 ```
 
 Make sure you have **IPFS** installed. We will use one of the previously deployed instances of **IPFS**.
@@ -259,10 +260,12 @@ Make sure you have **IPFS** installed. We will use one of the previously deploye
 To interact with pinning service use the `npm run bin` script. To start Pinning service run:
 
 ```
-npm run bin -- init --offerId=0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1 --db=./db.sqlite
+npm run bin -- init --offerId={your_account} --db=./db.sqlite
 ```
 
-This will provide the `peerId` that should be used in the *RIF Marketplace UI*  to create the Storage offer. Once the offer is created in the UI you can run the service using:
+This will provide the `peerId` that should be used in the *RIF Marketplace UI*  to create the Storage offer. You can create the offer on `http://localhost:3000/storage/sell?peerId={your_peer_id}`.
+
+Once the offer is created in the UI you can run the service using:
 
 ```
 NODE_ENV=ganache npm run bin daemon -- --log=debug --db=./db.sqlite
@@ -284,3 +287,4 @@ sh forward.sh
 # Troubleshooting
 ### RNS manager missmatch between networks
 Solution: switch back and forth a network on MetaMask/Nifty. If that does not work make sure you have setup correctly the network id in the RNS step.
+    
