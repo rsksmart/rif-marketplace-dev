@@ -169,7 +169,7 @@ npm run bin -- db-migration --up
 
 Run Precache process for the RNS Service (for ganache network)
 ```
-NODE_ENV=ganache npm run bin precache rns rates storage
+NODE_ENV=ganache npm run bin precache rns storage
 ```
 
 Run the cache for the RNS Service with
