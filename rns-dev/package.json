@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/rsksmart/rif-marketplace-rns-dev-env#readme",
   "devDependencies": {
-    "truffle": "^5.1.60"
+    "truffle": "^5.1.61"
   },
   "dependencies": {
     "@openzeppelin/upgrades": "2.8.0",
