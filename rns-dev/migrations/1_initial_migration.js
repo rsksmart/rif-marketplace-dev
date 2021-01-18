@@ -54,6 +54,9 @@ module.exports = async function(deployer, network, accounts) {
     true,
     false
   );
+  
+  console.log("Enabling RBTC(gas) Payments");
+  await marketplaceContract.allowGasPayments(true)
 
   const configuration = {
     rif: rns.rif.options.address,
