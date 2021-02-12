@@ -52,8 +52,8 @@ networks.forEach(network => {
   }
 
   // Triggers config
-  if (args.includes('triggers')) {
-    const triggersConfigPath = "./triggers-dev/out/";
+  if (args.includes('notifications')) {
+    const triggersConfigPath = "./notifications-dev/out/";
     const file = triggersConfigPath + network + ".json";
     if (fs.existsSync(file))
       triggersConfig[network] = JSON.parse(fs.readFileSync(file));
@@ -80,9 +80,9 @@ networks.forEach(network => {
   }
   // Triggers
   if (triggersConfig[network]) {
-    uiConfig[network].contractAddresses.triggersNotificationsManager = triggersConfig[network].notificationsManager;
-    uiConfig[network].contractAddresses.triggersStaking = triggersConfig[network].staking;
-    uiConfig[network].services.push("triggers");
+    uiConfig[network].contractAddresses.notificationsManager = triggersConfig[network].notificationsManager;
+    uiConfig[network].contractAddresses.notificationsStaking = triggersConfig[network].staking;
+    uiConfig[network].services.push("notifications");
   }
   fs.writeFileSync(uiOutfile, JSON.stringify(uiConfig, null, 4));
 
