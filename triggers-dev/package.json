@@ -1,0 +1,32 @@
+{
+  "name": "@rsksmart/rif-marketplace-storage-dev",
+  "version": "1.0.0",
+  "description": "TRIGGERS development environment for RIF Marketplace.",
+  "main": "truffle-config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsksmart/rif-marketplace-dev.git"
+  },
+  "keywords": [
+    "rsk",
+    "rif",
+    "triggers",
+    "marketplace"
+  ],
+  "bugs": {
+    "url": "https://github.com/rsksmart/rif-marketplace-dev/issues"
+  },
+  "homepage": "https://github.com/rsksmart/rif-marketplace-dev#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rsksmart/rif-marketplace-notifications": "0.0.1-dev.1"
+  },
+  "devDependencies": {
+    "@openzeppelin/truffle-upgrades": "^1.4.0",
+    "truffle": "^5.1.66"
+  }
+}
