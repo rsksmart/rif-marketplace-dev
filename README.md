@@ -287,4 +287,3 @@ sh forward.sh
 # Troubleshooting
 ### RNS manager missmatch between networks
 Solution: switch back and forth a network on MetaMask/Nifty. If that does not work make sure you have setup correctly the network id in the RNS step.
-    
