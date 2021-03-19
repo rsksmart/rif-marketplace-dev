@@ -65,24 +65,25 @@ networks.forEach(network => {
   // Create UI config
   const uiConfig = require("./templates/uiConfig.json");
   const uiOutfile = "./out/ui-config.json";
+  const serviceProps = { tokens: ["rbtc", "rif"] };
   // RNS
   if (rnsConfig[network]) {
     uiConfig[network].contractAddresses.rif = rnsConfig[network].rif;
     uiConfig[network].contractAddresses.rnsDotRskOwner = rnsConfig[network].rnsDotRskOwner;
     uiConfig[network].contractAddresses.marketplace = rnsConfig[network].marketplace;
-    uiConfig[network].services.push("rns");
+    uiConfig[network].services.rns = serviceProps;
   }
   // Storage
   if (storageConfig[network]) {
     uiConfig[network].contractAddresses.storageManager = storageConfig[network].storageManager;
     uiConfig[network].contractAddresses.storageStaking = storageConfig[network].staking;
-    uiConfig[network].services.push("storage");
+    uiConfig[network].services.storage = serviceProps;
   }
   // Triggers
   if (triggersConfig[network]) {
     uiConfig[network].contractAddresses.notificationsManager = triggersConfig[network].notificationsManager;
     uiConfig[network].contractAddresses.notificationsStaking = triggersConfig[network].staking;
-    uiConfig[network].services.push("notifications");
+    uiConfig[network].services.notifications = serviceProps;
   }
   fs.writeFileSync(uiOutfile, JSON.stringify(uiConfig, null, 4));
 
