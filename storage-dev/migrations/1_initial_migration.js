@@ -4,8 +4,8 @@ const Migrations = artifacts.require("Migrations");
 const StorageManager = artifacts.require("StorageManager");
 const Staking = artifacts.require("Staking");
 
-const whiteListedTokens = process.env['WHITE_LISTED_TOKENS'].split(',')
-const whiteListedProviders = process.env['WHITE_LISTED_PROVIDERS'].split(',')
+const whiteListedTokens = process.env['WHITE_LISTED_TOKENS'] ? process.env['WHITE_LISTED_TOKENS'].split(',') : []
+const whiteListedProviders = process.env['WHITE_LISTED_PROVIDERS'] ? process.env['WHITE_LISTED_PROVIDERS'].split(',') : []
 
 module.exports = async function(deployer, network, accounts) {
   await deployer.deploy(Migrations);
@@ -20,8 +20,8 @@ module.exports = async function(deployer, network, accounts) {
       Staking, marketplaceContract.address
   );
 
-  if (['mainnet', 'testnet'].includes(network)) {
-    for (token of whiteListedTokens) {
+  if (['mainnet', 'testnet', 'testnet-fork', 'mainnet-fork'].includes(network)) {
+    for (const token of whiteListedTokens) {
       console.log(`Storage Manager - white listing token ${token}`);
       await marketplaceContract.setWhitelistedTokens(
           token,
@@ -35,7 +35,7 @@ module.exports = async function(deployer, network, accounts) {
       );
     }
 
-    for (provider of whiteListedProviders) {
+    for (const provider of whiteListedProviders) {
       console.log("Storage Manager - Whitelisting Provider: " + provider);
       await marketplaceContract.setWhitelistedProvider(
           provider,

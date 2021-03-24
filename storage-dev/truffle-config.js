@@ -19,9 +19,12 @@
  */
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-const mnemonic = process.env['SECRET_MNEMONIC'];
+const accountSecret = process.env['ACCOUNT_SECRET']
 const nodeUrl = process.env['NODE_URL']
-
+const provider = {
+  providerOrUrl: nodeUrl,
+  ...accountSecret.length === 64 ? { privateKeys: [accountSecret] } : { mnemonic: accountSecret }
+}
 module.exports = {
   plugins: ['truffle-security'],
   /**
@@ -52,16 +55,17 @@ module.exports = {
       network_id: "*" // Any network (default: none)
     },
     mainnet: {
-      provider: () => new HDWalletProvider(mnemonic, nodeUrl),
+      provider: () => new HDWalletProvider(provider),
       network_id: 30,
       // gas: 5500000,
+      skipDryRun: true,
       production: true
     },
     testnet: {
-      provider: () => new HDWalletProvider(mnemonic, nodeUrl),
+      provider: () => new HDWalletProvider(provider),
       network_id: 31,
       // gas: 5500000,
-      production: true
+      skipDryRun: true,
     }
   },
 
@@ -80,7 +84,6 @@ module.exports = {
           enabled: true,
           runs: 200
         },
-      //  evmVersion: "byzantium"
        }
     }
   }

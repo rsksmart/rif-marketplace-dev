@@ -30,6 +30,7 @@
   "homepage": "https://github.com/rsksmart/rif-marketplace-dev#readme",
   "devDependencies": {
     "@openzeppelin/truffle-upgrades": "^1.1.1",
+    "@truffle/hdwallet-provider": "^1.2.4",
     "truffle": "^5.1.41"
   },
   "dependencies": {
