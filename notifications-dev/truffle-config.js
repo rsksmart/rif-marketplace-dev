@@ -18,12 +18,13 @@
  *
  */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
-// const infuraKey = "fj4jll3k.....";
-//
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
-
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const accountSecret = process.env['ACCOUNT_SECRET']
+const nodeUrl = process.env['NODE_URL']
+const provider = {
+  providerOrUrl: nodeUrl,
+  ...accountSecret.length === 64 ? { privateKeys: [accountSecret] } : { mnemonic: accountSecret }
+}
 module.exports = {
   plugins: ['truffle-security'],
   /**
@@ -57,6 +58,19 @@ module.exports = {
       host: "127.0.0.1", // Localhost (default: none)
       port: 8545, // Standard Ethereum port (default: none)
       network_id: "*" // Any network (default: none)
+    },
+    mainnet: {
+      provider: () => new HDWalletProvider(provider),
+      network_id: 30,
+      // gas: 5500000,
+      skipDryRun: true,
+      production: true
+    },
+    testnet: {
+      provider: () => new HDWalletProvider(provider),
+      network_id: 31,
+      // gas: 5500000,
+      skipDryRun: true,
     }
     // Another network with more advanced options...
     // advanced: {
