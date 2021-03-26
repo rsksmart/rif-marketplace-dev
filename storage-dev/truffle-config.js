@@ -57,13 +57,14 @@ module.exports = {
     mainnet: {
       provider: () => new HDWalletProvider(provider),
       network_id: 30,
+      gasPrice: 67e6,
       // gas: 5500000,
       skipDryRun: true,
-      production: true
     },
     testnet: {
       provider: () => new HDWalletProvider(provider),
       network_id: 31,
+      gasPrice: 67e6,
       // gas: 5500000,
       skipDryRun: true,
     }
