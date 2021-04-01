@@ -29,8 +29,9 @@
   },
   "homepage": "https://github.com/rsksmart/rif-marketplace-dev#readme",
   "devDependencies": {
-    "@openzeppelin/truffle-upgrades": "^1.1.1",
-    "truffle": "^5.1.41"
+    "@openzeppelin/truffle-upgrades": "^1.5.0",
+    "@truffle/hdwallet-provider": "^1.2.4",
+    "truffle": "^5.2.6"
   },
   "dependencies": {
     "@rsksmart/rif-marketplace-storage": "0.1.0-dev.7"
