@@ -59,6 +59,7 @@ module.exports = {
       network_id: 30,
       gasPrice: 67e6,
       // gas: 5500000,
+      networkCheckTimeout: 10e3,
       skipDryRun: true,
     },
     testnet: {
@@ -66,6 +67,7 @@ module.exports = {
       network_id: 31,
       gasPrice: 67e6,
       // gas: 5500000,
+      networkCheckTimeout: 10e3,
       skipDryRun: true,
     }
   },
