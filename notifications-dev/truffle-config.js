@@ -64,14 +64,15 @@ module.exports = {
       network_id: 30,
       gasPrice: 67e6,
       // gas: 5500000,
-      skipDryRun: true,
-      production: true
+      networkCheckTimeout: 10e3,
+      skipDryRun: true
     },
     testnet: {
       provider: () => new HDWalletProvider(provider),
       network_id: 31,
       gasPrice: 67e6,
       // gas: 5500000,
+      networkCheckTimeout: 10e3,
       skipDryRun: true,
     }
     // Another network with more advanced options...
