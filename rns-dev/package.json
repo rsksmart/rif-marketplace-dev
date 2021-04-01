@@ -28,6 +28,7 @@
   "homepage": "https://github.com/rsksmart/rif-marketplace-rns-dev-env#readme",
   "devDependencies": {
     "truffle": "^5.2.6"
+    "@truffle/hdwallet-provider": "^1.2.4",
   },
   "dependencies": {
     "@openzeppelin/upgrades": "2.8.0",
