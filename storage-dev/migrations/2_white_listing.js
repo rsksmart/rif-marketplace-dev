@@ -23,7 +23,7 @@ module.exports = async function(deployer, network, accounts) {
             whiteListedTokens.push(...mainnetDefaultTokens);
             whiteListedProviders.push(...mainnetDefaultProviders);
         }
-        
+
         for (const token of whiteListedTokens) {
             console.log(`Storage Manager - white listing token ${token}`);
             await marketplaceContract.setWhitelistedTokens(
@@ -58,29 +58,16 @@ module.exports = async function(deployer, network, accounts) {
             true
         );
 
-        console.log("Storage Manager - Whitelisting Provider: " + accounts[0]);
-        await marketplaceContract.setWhitelistedProvider(
-            accounts[0],
-            true
-        );
-
-        console.log("Storage Manager - Whitelisting Provider: " + accounts[1]);
-        await marketplaceContract.setWhitelistedProvider(
-            accounts[1],
-            true
-        );
-
-        console.log("Storage Manager - Whitelisting Provider: " + accounts[2]);
-        await marketplaceContract.setWhitelistedProvider(
-            accounts[2],
-            true
-        );
-
-        console.log("Storage Manager - Whitelisting Provider: " + accounts[3]);
-        await marketplaceContract.setWhitelistedProvider(
-            accounts[3],
-            true
-        );
+        const providers = whiteListedProviders.length
+            ? whiteListedProviders
+            : whiteListedProviders || [accounts[0], accounts[1], accounts[2], accounts[3]]
+        for (const provider of providers) {
+            console.log("Storage Manager - Whitelisting Provider: " + provider);
+            await marketplaceContract.setWhitelistedProvider(
+                provider,
+                true
+            );
+        }
 
         console.log("Staking - Enabling RBTC Payments");
         await stakingContract.setWhitelistedTokens(

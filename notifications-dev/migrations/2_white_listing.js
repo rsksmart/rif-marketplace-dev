@@ -44,29 +44,16 @@ module.exports = async function(deployer, network, accounts) {
             true
         );
 
-        console.log("Notifications Manager - Whitelisting Provider: " + accounts[0]);
-        await notificationsContract.setWhitelistedProvider(
-            accounts[0],
-            true
-        );
-
-        console.log("Notifications Manager - Whitelisting Provider: " + accounts[1]);
-        await notificationsContract.setWhitelistedProvider(
-            accounts[1],
-            true
-        );
-
-        console.log("Notifications Manager - Whitelisting Provider: " + accounts[2]);
-        await notificationsContract.setWhitelistedProvider(
-            accounts[2],
-            true
-        );
-
-        console.log("Notifications Manager - Whitelisting Provider: " + accounts[3]);
-        await notificationsContract.setWhitelistedProvider(
-            accounts[3],
-            true
-        );
+        const providers = whiteListedProviders.length
+            ? whiteListedProviders
+            : whiteListedProviders || [accounts[0], accounts[1], accounts[2], accounts[3]]
+        for (const provider of providers) {
+            console.log("Notifications Manager - Whitelisting Provider: " + provider);
+            await notificationsContract.setWhitelistedProvider(
+                provider,
+                true
+            );
+        }
 
         console.log("Staking - Enabling RBTC Payments");
         await stakingContract.setWhitelistedTokens(

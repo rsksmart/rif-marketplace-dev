@@ -23,7 +23,7 @@ const accountSecret = process.env['ACCOUNT_SECRET']
 const nodeUrl = process.env['NODE_URL']
 const provider = {
   providerOrUrl: nodeUrl,
-  ...accountSecret.length === 64 ? { privateKeys: [accountSecret] } : { mnemonic: accountSecret }
+  ...accountSecret && accountSecret.length === 64 ? { privateKeys: [accountSecret] } : { mnemonic: accountSecret }
 }
 module.exports = {
   /**
