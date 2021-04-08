@@ -26,6 +26,7 @@
     "@rsksmart/rif-marketplace-notifications": "0.0.1-dev.1"
   },
   "devDependencies": {
+    "@truffle/hdwallet-provider": "1.2.3",
     "@openzeppelin/truffle-upgrades": "^1.4.0",
     "truffle": "^5.1.66"
   }
