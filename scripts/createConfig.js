@@ -18,7 +18,7 @@ const networkIds = {
 };
 const rnsConfig = {};
 const storageConfig = {};
-const triggersConfig = {};
+const notifierConfig = {};
 var rnsAdminFilePath;
 var storageContractAddress;
 
@@ -45,18 +45,18 @@ networks.forEach(network => {
 
   // Storage Config File
   if (args.includes('storage')) {
-     const storageConfigPath = "./storage-dev/out/";
-     const file = storageConfigPath + network + ".json";
-     if (fs.existsSync(file))
-       storageConfig[network] = JSON.parse(fs.readFileSync(file));
+    const storageConfigPath = "./storage-dev/out/";
+    const file = storageConfigPath + network + ".json";
+    if (fs.existsSync(file))
+      storageConfig[network] = JSON.parse(fs.readFileSync(file));
   }
 
   // Triggers config
-  if (args.includes('notifications')) {
-    const triggersConfigPath = "./notifications-dev/out/";
-    const file = triggersConfigPath + network + ".json";
+  if (args.includes('notifier')) {
+    const notifierConfigPath = "./notifier-dev/out/";
+    const file = notifierConfigPath + network + ".json";
     if (fs.existsSync(file))
-      triggersConfig[network] = JSON.parse(fs.readFileSync(file));
+      notifierConfig[network] = JSON.parse(fs.readFileSync(file));
   }
 
   /**
@@ -80,10 +80,10 @@ networks.forEach(network => {
     uiConfig[network].services.storage = serviceProps;
   }
   // Triggers
-  if (triggersConfig[network]) {
-    uiConfig[network].contractAddresses.notificationsManager = triggersConfig[network].notificationsManager;
-    uiConfig[network].contractAddresses.notificationsStaking = triggersConfig[network].staking;
-    uiConfig[network].services.notifications = serviceProps;
+  if (notifierConfig[network]) {
+    uiConfig[network].contractAddresses.notifierManager = notifierConfig[network].notifierManager;
+    uiConfig[network].contractAddresses.notifierStaking = notifierConfig[network].staking;
+    uiConfig[network].services.notifier = serviceProps;
   }
   fs.writeFileSync(uiOutfile, JSON.stringify(uiConfig, null, 4));
 
@@ -130,6 +130,6 @@ networks.forEach(network => {
     ];
     fs.writeFileSync(roomsOutFile, JSON.stringify(roomsConfig, null, 4));
   }
-  // TRIGGERS TODO: Create triggers config for cache
+  // TRIGGERS TODO: Create notifier config for cache
   fs.writeFileSync(cacheOutFile, JSON.stringify(cacheConfig, null, 4));
 });
