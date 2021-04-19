@@ -60,7 +60,7 @@ module.exports = async function(deployer, network, accounts) {
 
         const providers = whiteListedProviders.length
             ? whiteListedProviders
-            : whiteListedProviders || [accounts[0], accounts[1], accounts[2], accounts[3]]
+            : [accounts[0], accounts[1], accounts[2], accounts[3]]
         for (const provider of providers) {
             console.log("Storage Manager - Whitelisting Provider: " + provider);
             await marketplaceContract.setWhitelistedProvider(
