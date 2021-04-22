@@ -17,6 +17,10 @@ services:
       - "-d"
       - "--db=/app/database"
       - "--networkId=8545"
+      - "--blockTime=15"
+      - "--verbose=true"
+      - "--gasLimit=10000000"
+      - "--allowUnlimitedContractSize"
     ports:
       - 8545:8545
     volumes:

@@ -11,6 +11,8 @@
     "rsk",
     "rif",
     "triggers",
+    "notifier",
+    "notifications",
     "marketplace"
   ],
   "bugs": {
@@ -23,7 +25,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@rsksmart/rif-marketplace-notifications": "0.0.1-dev.1"
+    "@rsksmart/rif-marketplace-notifier": "0.0.1-dev.2"
   },
   "devDependencies": {
     "@truffle/hdwallet-provider": "1.2.3",
