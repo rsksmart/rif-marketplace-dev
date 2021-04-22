@@ -18,6 +18,7 @@ This project provides an easy to use developers environment for the **RIF Market
     5. [RIF Marketplace UI](#5-rif-marketplace-ui)
     6. [RNS Manager](#6-rns-manager)
     7. [RIF Storage Pinning service](#7-rif-storage-pinning-service)
+    8. [RIF Notifier service](#8-rif-notifier-service)
 - Using the RIF Marketplace
     - [Registering domains using RNS](#registering-domains-using-rns)
 - [Troubleshooting](#troubleshooting) 
@@ -43,6 +44,7 @@ These will be installed during the tutorial
 1. [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui/) project
 1. [RNS Manager Project](https://github.com/rnsdomains/rns-manager-react)
 1. [RIF Storage Pinning Service](https://github.com/rsksmart/rif-storage-pinner/) project
+1. [RIF Notifier Service](https://github.com/rsksmart/rif-notifier/tree/feature/rif-notifier-v2) project
 
 # Setup:
 ## 1. Developers Environment
@@ -274,6 +276,51 @@ NODE_ENV=ganache npm run bin daemon -- --log=debug --db=./db.sqlite
 You should see in logs when new Agreements are detected and pinned. 
 
 **See help pages for details on the parameters and additional commands!!!**
+
+## 8. RIF Notifier service
+
+> This is a service that listens on blockchain events and and allow to buy a specific notification subscription
+> Supported gateways: SMS, API, Email
+
+### Requirements
+
+1) `JAVA` and `MAVEN`
+2) `MySQL`
+
+### Setup the DB 
+```
+Import dump of DB from "src/main/resources/db_dumps/Dump20000.sql"
+Then run:
+$ mysql -u root -p DB_NAME < src/main/resources/db_dumps/Dump200000.sql
+```
+
+### Configure
+
+Go to `src/main/resources/application.properties` and set the following data:
+ 
+ - Connection to DB:
+```
+    spring.datasource.url=jdbc:mysql://localhost:3306/notifierone
+    spring.datasource.username=notifier1
+    spring.datasource.password=123456
+```
+ - Connection to the Node:
+```rsk.blockchain.endpoint=http://localhost:7545```
+ - RSK Blockchain endpoint for listening to contract events, new blocks and new transactions
+```rsk.blockchain.endpoint=http://localhost:4444```
+ - RSK Node endpoint, listening to contract events and fetch lumino tokens
+```rsk.blockchain.tokennetworkregistry=0x088AF4986f3DBD66b4d97bE5f6742BC4853D8BA8```
+ - Multichain contract address, to obtain the chainaddresses event
+```rsk.blockchain.multichaincontract=0x7557fcE0BbFAe81a9508FF469D481f2c72a8B5f3```
+ - Notification manager contract address
+```rsk.blockchain.notifier-smart-contract-address=0xE843355b677CB7954e20ADF0f20BaFe58eE41ad3```
+
+### Run
+```
+mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=${PORT}"
+```
+(As a note, you can ignore the `-Dspring-boot` arguments, and just run the notifier with `mvn spring-boot:run`)
+
 
 # Using the RIF Marketplace
 
