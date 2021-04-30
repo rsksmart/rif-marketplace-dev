@@ -51,7 +51,8 @@ module.exports = {
     regtest: {
       host: "127.0.0.1", // Localhost (default: none)
       port: 4444, // Standard Ethereum port (default: none)
-      network_id: "*" // Any network (default: none)
+      network_id: "*", // Any network (default: none)
+      gas: 6800000,
     },
     ganache: {
       host: "127.0.0.1", // Localhost (default: none)

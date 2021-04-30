@@ -4,6 +4,8 @@ const Staking = artifacts.require("Staking");
 
 const testnetDefaultTokens = ['0x0000000000000000000000000000000000000000', '0x19f64674d8a5b4e652319f5e239efd3bc969a1fe']
 const mainnetDefaultTokens = ['0x0000000000000000000000000000000000000000', '0x2acc95758f8b5f583470ba265eb685a8f45fc9d5']
+const regtestDefaultTokens = ['0x0000000000000000000000000000000000000000']
+
 const whiteListedTokens = process.env['WHITE_LISTED_TOKENS'] ? process.env['WHITE_LISTED_TOKENS'].split(',') : []
 const whiteListedProviders = process.env['WHITE_LISTED_PROVIDERS'] ? process.env['WHITE_LISTED_PROVIDERS'].split(',') : []
 
@@ -13,11 +15,14 @@ module.exports = async function (deployer, network, accounts) {
 
     const isTestnet = ['testnet', 'testnet-fork'].includes(network);
     const isMainnet = ['mainnet', 'mainnet-fork'].includes(network);
-    if (isTestnet || isMainnet) {
+    const isRegtest = ['regtest', 'regtest-fork'].includes(network);
+    if (isTestnet || isMainnet || isRegtest) {
         if (isTestnet) {
             whiteListedTokens.push(...testnetDefaultTokens);
         } else if (isMainnet) {
             whiteListedTokens.push(...mainnetDefaultTokens);
+        } else if (isRegtest) {
+            whiteListedTokens.push(...regtestDefaultTokens);
         }
 
         for (const token of whiteListedTokens) {
