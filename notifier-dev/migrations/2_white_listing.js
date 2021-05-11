@@ -4,7 +4,7 @@ const Staking = artifacts.require("Staking");
 
 const testnetDefaultTokens = ['0x0000000000000000000000000000000000000000', '0x19f64674d8a5b4e652319f5e239efd3bc969a1fe']
 const mainnetDefaultTokens = ['0x0000000000000000000000000000000000000000', '0x2acc95758f8b5f583470ba265eb685a8f45fc9d5']
-const regtestDefaultTokens = ['0x0000000000000000000000000000000000000000']
+const regtestDefaultTokens = ['0x0000000000000000000000000000000000000000', '0x09DAf8FEf3cE62f9D2fEB505FeA2113581172550']
 
 const whiteListedTokens = process.env['WHITE_LISTED_TOKENS'] ? process.env['WHITE_LISTED_TOKENS'].split(',') : []
 const whiteListedProviders = process.env['WHITE_LISTED_PROVIDERS'] ? process.env['WHITE_LISTED_PROVIDERS'].split(',') : []
