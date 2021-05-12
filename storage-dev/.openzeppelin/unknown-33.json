@@ -1,0 +1,177 @@
+{
+  "manifestVersion": "3.2",
+  "impls": {
+    "ff511cc4c1c07055cb8e978519fac2701c9ce5e613cc8eaece6da4afa4435d48": {
+      "address": "0x74Dc4471FA8C8fBE09c7a0C400a0852b0A9d04b2",
+      "txHash": "0x676575d9338ff8dba4f7bda2fcb67bd42f5fe418c200517288bcfbd27c7f69be",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "initialized",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:21"
+          },
+          {
+            "contract": "Initializable",
+            "label": "initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:26"
+          },
+          {
+            "contract": "Initializable",
+            "label": "______gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:61"
+          },
+          {
+            "contract": "ContextUpgradeSafe",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol:37"
+          },
+          {
+            "contract": "OwnableUpgradeSafe",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol:18"
+          },
+          {
+            "contract": "OwnableUpgradeSafe",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol:78"
+          },
+          {
+            "contract": "PausableUpgradeSafe",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/utils/Pausable.sol:26"
+          },
+          {
+            "contract": "PausableUpgradeSafe",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/utils/Pausable.sol:84"
+          },
+          {
+            "contract": "StorageManager",
+            "label": "offerRegistry",
+            "type": "t_mapping(t_address,t_struct(Offer)1893_storage)",
+            "src": "../@rsksmart/rif-marketplace-storage/contracts/StorageManager.sol:52"
+          },
+          {
+            "contract": "StorageManager",
+            "label": "isWhitelistedToken",
+            "type": "t_mapping(t_address,t_bool)",
+            "src": "../@rsksmart/rif-marketplace-storage/contracts/StorageManager.sol:55"
+          },
+          {
+            "contract": "StorageManager",
+            "label": "isWhitelistedProvider",
+            "type": "t_mapping(t_address,t_bool)",
+            "src": "../@rsksmart/rif-marketplace-storage/contracts/StorageManager.sol:58"
+          }
+        ],
+        "types": {
+          "t_mapping(t_address,t_struct(Offer)1893_storage)": {
+            "label": "mapping(address => struct StorageManager.Offer)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_struct(Offer)1893_storage": {
+            "label": "struct StorageManager.Offer",
+            "members": [
+              {
+                "label": "utilizedCapacity",
+                "type": "t_uint64"
+              },
+              {
+                "label": "totalCapacity",
+                "type": "t_uint64"
+              },
+              {
+                "label": "billingPlansForToken",
+                "type": "t_mapping(t_address,t_mapping(t_uint64,t_uint128))"
+              },
+              {
+                "label": "agreementRegistry",
+                "type": "t_mapping(t_bytes32,t_struct(Agreement)1904_storage)"
+              }
+            ]
+          },
+          "t_uint64": {
+            "label": "uint64"
+          },
+          "t_mapping(t_address,t_mapping(t_uint64,t_uint128))": {
+            "label": "mapping(address => mapping(uint64 => uint128))"
+          },
+          "t_mapping(t_uint64,t_uint128)": {
+            "label": "mapping(uint64 => uint128)"
+          },
+          "t_uint128": {
+            "label": "uint128"
+          },
+          "t_mapping(t_bytes32,t_struct(Agreement)1904_storage)": {
+            "label": "mapping(bytes32 => struct StorageManager.Agreement)"
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          },
+          "t_struct(Agreement)1904_storage": {
+            "label": "struct StorageManager.Agreement",
+            "members": [
+              {
+                "label": "billingPrice",
+                "type": "t_uint128"
+              },
+              {
+                "label": "billingPeriod",
+                "type": "t_uint64"
+              },
+              {
+                "label": "availableFunds",
+                "type": "t_uint256"
+              },
+              {
+                "label": "size",
+                "type": "t_uint64"
+              },
+              {
+                "label": "lastPayoutDate",
+                "type": "t_uint128"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    }
+  },
+  "proxies": [
+    {
+      "address": "0x89bac3BB0517F7Dc0E5E94265217A9Acc5cc489f",
+      "kind": "transparent",
+      "txHash": "0xbfa4c4b4aeafab2b6e270c453ae90d8b812e859affb3b4ebf306b3cf19bb0c7c"
+    }
+  ],
+  "admin": {
+    "address": "0x96A90Ee24C20c78Ba20AcE1a2aa4D59F79353C54",
+    "txHash": "0xf554672be3ee099439eb60607e5605cec674619817429bb350bd7799cfc13ff4"
+  }
+}

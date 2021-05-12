@@ -1,4 +1,4 @@
 node_modules/
 build/
 out
-.openzeppelin
+.openzeppelin/*-1337.json
