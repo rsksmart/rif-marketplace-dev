@@ -66,12 +66,12 @@ The Ganache blockchain will now run and it is available to deploy the correspond
 First, install the dependencies (make sure to **use node v10**, you can switch using `nvm use 10`). 
 
 ```
-sh install.sh rns storage
+sh install.sh rns storage notifier
 ```
 
 Run the deployment script for the RNS and Marketplace contracts deploying to ganache network
 ```
-sh deploy.sh rns storage
+sh deploy.sh rns storage notifier
 ```
 
 This will create `./out` folder with a number of configuration files:

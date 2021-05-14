@@ -1,6 +1,6 @@
-# RIF Marketplace - TRIGGERS dev env
+# RIF Marketplace - Notifier dev env
 
-TRIGGERS development environment for RIF Marketplace.
+Notifier development environment for RIF Marketplace.
 
 ## Run with Ganache
 
