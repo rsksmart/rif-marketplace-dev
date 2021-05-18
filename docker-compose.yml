@@ -17,7 +17,7 @@ services:
       - "-d"
       - "--db=/app/database"
       - "--networkId=8545"
-      - "--blockTime=15"
+      # - "--blockTime=15" Disabled as the automatic block forwarding (at least with period of 15 seconds) creates issues in the runtime as well as drastically slows down the deployment, rendering redeployment and thus development more tedious.
       - "--verbose=true"
       - "--gasLimit=10000000"
       - "--allowUnlimitedContractSize"
