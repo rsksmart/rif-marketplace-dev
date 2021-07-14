@@ -21,7 +21,7 @@
   "homepage": "https://github.com/rsksmart/rif-marketplace-dev#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "fund-dev-accounts": "truffle exec ./fund-dev-accounts.js --network regtest"
+    "fund-dev-accounts": "npx truffle exec ./fund-dev-accounts.js --network regtest"
   },
   "author": "",
   "license": "ISC",
