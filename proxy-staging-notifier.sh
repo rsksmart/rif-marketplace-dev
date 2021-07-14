@@ -1,0 +1,1 @@
+ssh -J jump@bastion-01.aws-us-east-1.ops.rskcomputing.net ubuntu@mkt-notifier-01.aws-us-west-2.staging.marketplace.rifcomputing.net
