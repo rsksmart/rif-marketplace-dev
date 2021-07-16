@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/rsksmart/rif-marketplace-rns-dev-env#readme",
   "devDependencies": {
-    "truffle": "^5.3.4",
+    "truffle": "^5.4.1",
     "@truffle/hdwallet-provider": "^1.2.4"
   },
   "dependencies": {
