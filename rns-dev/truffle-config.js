@@ -48,9 +48,9 @@ module.exports = {
     //  port: 8545,            // Standard Ethereum port (default: none)
     //  network_id: "*",       // Any network (default: none)
     // },
-    regtest: {
+    rskdevnet: {
       host: "127.0.0.1", // Localhost redirection
-      port: 4444, // Standard Ethereum port (default: none)
+      port: 4444, // Standard RSK port (default: none)
       network_id: 33 // Regtest network
     },
     ganache: {
@@ -58,7 +58,7 @@ module.exports = {
       port: 8545, // Standard Ethereum port (default: none)
       network_id: "*" // Any network (default: none)
     },
-    mainnet: {
+    rskmainnet: {
       provider: () => new HDWalletProvider(provider),
       network_id: 30,
       gasPrice: 67e6,
@@ -66,7 +66,7 @@ module.exports = {
       skipDryRun: true,
       production: true
     },
-    testnet: {
+    rsktestnet: {
       provider: () => new HDWalletProvider(provider),
       network_id: 31,
       gasPrice: 67e6,

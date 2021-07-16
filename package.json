@@ -1,0 +1,55 @@
+{
+  "name": "rif-marketplace-meta",
+  "version": "1.0.0",
+  "description": "meta repository for convenient and fast local development of the rif marketplace",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install:mkp": "npm i && meta npm install --include-only $npm_package_config_mkp_apps",
+    "install:node": "npm i && meta npm install --include-only $npm_package_config_node_apps",
+    "install:java": "",
+    "install:all": "",
+    "ganache-cli": "npx ganache-cli -d --db=./data/ganache/database --networkId=8545 --verbose=true --gasLimit=10000000 --allowUnlimitedContractSize",
+    "ganache-cli:mining": "npx ganache-cli -d --db=./data/ganache/database --networkId=8545 --verbose=true --gasLimit=10000000 --allowUnlimitedContractSize --blockTime=15",
+    "contracts:deploy": "meta exec \"npx truffle migrate --network ganache\" --include-only $npm_package_config_contracts",
+    "contracts:redeploy": "meta exec \"npx truffle migrate --network ganache --reset\" --include-only $npm_package_config_contracts",
+    "contracts:deploy:rns": "cd rns-dev && npx truffle migrate --network ganache && cd ..",
+    "contracts:redeploy:rns": "cd rns-dev && npx truffle migrate --network ganache --reset && cd ..",
+    "contracts:deploy:storage": "cd storage-dev && npx truffle migrate --network ganache && cd ..",
+    "contracts:redeploy:storage": "cd storage-dev && npx truffle migrate --network ganache --reset && cd ..",
+    "contracts:deploy:notifier": "cd notifier-dev && npx truffle migrate --network ganache && cd ..",
+    "contracts:redeploy:notifier": "cd notifier-dev && npx truffle migrate --network ganache --reset && cd ..",
+    "contracts:deploy:devnet": "meta exec \"npx truffle migrate --network rskdevnet\" --include-only $npm_package_config_contracts",
+    "contracts:redeploy:devnet": "meta exec \"npx truffle migrate --network rskdevnet --reset\" --include-only $npm_package_config_contracts",
+    "contracts:deploy:testnet": "meta exec \"npx truffle migrate --network rsktestnet\" --include-only $npm_package_config_contracts",
+    "contracts:deploy:mainnet": "meta exec \"npx truffle migrate --network rskmainnet\" --include-only $npm_package_config_contracts",
+    "contracts:config": "node scripts/createConfig.js rns storage notifier"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsksmart/rif-marketplace-dev.git"
+  },
+  "keywords": [
+    "rif",
+    "marketplace",
+    "meta",
+    "dev"
+  ],
+  "author": "Artem Brazhnikov",
+  "license": "MIT",
+  "config": {
+    "contracts": "rns-dev,storage-dev,notifier-dev",
+    "mkp_apps": "rns-dev,storage-dev,notifier-dev,cache,dapp",
+    "node_apps": "rns-dev,storage-dev,notifier-dev,cache,dapp,pinner,upload-service,rns-manager"
+  },
+  "bugs": {
+    "url": "https://github.com/rsksmart/rif-marketplace-dev/issues"
+  },
+  "homepage": "https://github.com/rsksmart/rif-marketplace-dev#readme",
+  "devDependencies": {
+    "meta-npm": "^1.2.7"
+  },
+  "dependencies": {
+    "json5": "^2.2.0"
+  }
+}

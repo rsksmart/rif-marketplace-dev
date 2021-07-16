@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "cache": "git@github.com:rsksmart/rif-marketplace-cache.git",
+    "dapp": "git@github.com:rsksmart/rif-marketplace-ui.git",
+    "pinner": "git@github.com:rsksmart/rif-storage-pinner.git",
+    "upload-service": "git@github.com:rsksmart/rif-marketplace-upload-service.git",
+    "rns-manager": "git@github.com:rnsdomains/rns-manager-react.git",
+    "notifier": "git@github.com:rsksmart/rif-notifier.git"
+  }
+}
