@@ -49,7 +49,7 @@ networks.forEach(network => {
     } else if (network === 'rskmainnet') {
       fs.copyFileSync(rnsAdminFilePath, './rns-manager/src/config/contracts.json');
     }
-    // TODO: add rskdevnet when neededß
+    // TODO: add rskdevnet when needed
   }
 
   // Storage Config File
