@@ -23,7 +23,15 @@
     "contracts:redeploy:devnet": "meta exec \"npx truffle migrate --network rskdevnet --reset\" --include-only $npm_package_config_contracts",
     "contracts:deploy:testnet": "meta exec \"npx truffle migrate --network rsktestnet\" --include-only $npm_package_config_contracts",
     "contracts:deploy:mainnet": "meta exec \"npx truffle migrate --network rskmainnet\" --include-only $npm_package_config_contracts",
-    "contracts:config": "node scripts/createConfig.js rns storage notifier"
+    "contracts:config": "node scripts/createConfig.js rns storage notifier",
+    "pinner:init": "cd pinner && npm run init & cd ..",
+    "pinner:ipfs": "cd pinner && npm run ipfs:consumer daemon && npm run ipfs:provider daemon && cd ..",
+    "cache:create-db": "cd cache && npm run bin -- db-migration --up && cd ..",
+    "cache:precache": "cd cache && NODE_ENV=ganache npm run bin precache all && cd ..",
+    "cache:start": "cd cache && NODE_ENV=ganache npm run bin -- start --enable rns storage notifier --log=debug && cd ..",
+    "cache": "npm run cache:create-db && npm run cache:precache && npm run cache:start",
+    "dapp": "cd dapp && npm start && cd ..",
+    "backend": "npm run install:mkp && npm run contracts:deploy && npm run cache"
   },
   "repository": {
     "type": "git",
