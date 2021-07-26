@@ -6,8 +6,9 @@ This project provides an easy to use developers environment for the **RIF Market
 - [Dependencies](#dependencies)
     - [Prerequisities](#prerequisities)
     - [Part of tutorial](#part-of-tutorial)
-- Setup
-    1. Developers Environment
+- [Quick Start](#quick-start)
+- [Detailed Setup](#detailed-setup)
+    1. [Developers Environment](#developers-environment)
         1. [Starting docker](#11-starting-docker)
         2. [Deploying smart contracts](#12-deploying-smart-contracts)
         3. [Browser wallet](#13-browser-wallet)
@@ -18,6 +19,7 @@ This project provides an easy to use developers environment for the **RIF Market
     5. [RIF Marketplace UI](#5-rif-marketplace-ui)
     6. [RNS Manager](#6-rns-manager)
     7. [RIF Storage Pinning service](#7-rif-storage-pinning-service)
+    8. [RIF Notifier Service](#8-rif-notifier-service)
 - Using the RIF Marketplace
     - [Registering domains using RNS](#registering-domains-using-rns)
 - [Troubleshooting](#troubleshooting) 
@@ -26,9 +28,9 @@ This project provides an easy to use developers environment for the **RIF Market
 # Dependencies
 
 ## Prerequisities
-0. node v10 (or [nvm](https://github.com/nvm-sh/nvm) or [n](https://github.com/tj/n) with node v10 installed)
+0. node v10 (or [nvm](https://github.com/nvm-sh/nvm) or [n](https://github.com/tj/n) with node v10 installed (**to be upgraded**))
 1. [meta](https://github.com/mateodelnorte/meta) is used for bulk repo and tasks management. `npm i -g meta`
-2. [pm2](https://github.com/Unitech/pm2) is used for processes and logs management in the local environment
+2. [pm2](https://github.com/Unitech/pm2) is used for processes and logs management in the local environment. `npm i -g pm2`
 3. [IPFS](https://ipfs.io/) The recommended way to install IPFS is using [ipfs-update](https://github.com/ipfs/ipfs-update) but there are other ways described [here](https://github.com/ipfs/go-ipfs#install) as well. Recommended is to run the latest version but required is at least `0.7.0`. (used for the storage setup only)
 4. [Docker](https://www.docker.com/) (optional, only if you use docker setup)
 5. [Docker compose](https://docs.docker.com/compose/install/) (optional, only if you use docker setup)
@@ -37,67 +39,67 @@ This project provides an easy to use developers environment for the **RIF Market
 These repositories will be cloned and installed during the tutorial
 
 1. [RIF Marketplace Developer Environment](https://github.com/rsksmart/rif-marketplace-dev/) project  
+1. **(Disabled)** [RIF Comms Pubsub BootNode](https://github.com/rsksmart/rif-communications-pubsub-bootnode) project  
 1. [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache/) project
 1. [RIF Marketplace Upload Service](https://github.com/rsksmart/rif-marketplace-upload-service/) project
 1. [RIF Storage Pinning Service](https://github.com/rsksmart/rif-storage-pinner/) project
 1. [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui/) project
 1. [RNS Manager Project](https://github.com/rnsdomains/rns-manager-react)
-1. [RIF Notifier](https://github.com/rsksmart/rif-notifier)
+1. [RIF Notifier Service](https://github.com/rsksmart/rif-notifier) project
 
 # Quick Start
 
-1. `meta git clone git@github.com:rsksmart/rif-marketplace-dev.git` - will clone the meta dev repository and recursively clone the nested ones. In case you cloned the repo with the standard git command, execute - `meta git clone` inside of the repo.
-2. `npm run all` - will install all the dependencies, configure project with default options for the local setup, and start services and applications via `pm2` manager.
+1. `meta git clone git@github.com:rsksmart/rif-marketplace-dev.git` - will clone the meta dev repository and recursively clone the nested ones. In case you cloned the repo with the standard git command, simply execute - `meta git update` inside of the repo.
+2. Execute `npm run all` or `npm run mkp`
+- `npm run all` - will install all the dependencies, configure project with default options for the local setup, and start services and applications via `pm2` manager.
+- `npm run mkp` - will do the same, but only for the contracts, cache and dapp.
 3. Use `pm2` to see the list of running processes (`pm2 list`), logs(`pm2 logs <id|name>`), etc.
+You should see the result similar to this one
+![pm2-list](/assets/images/pm2-list.png)
 
 
-`meta` tool provides a convenient interface to work with multiple repositories simultaneously. There are different plugins for bulk operations, includeing `git` and `npm`. Some examples are:
+`meta` tool provides a convenient interface to work with multiple repositories simultaneously. There are different plugins for bulk operations, including `git` and `npm`. Some examples are:
 - `meta git status`, `meta git status --include-only dir1,dir2`
 - `meta git update`
 - `meta git -b checkout branch-name`
+- `meta npm install`
+- `meta exec "<any-command>"`
 
 Please refer to the documentation for more details.
 
 
-# Setup:
+# Detailed Setup:
 ## 1. Developers Environment
 Download and setup the RIF Marketplace Developer Environment
 ```
-git clone git@github.com:rsksmart/rif-marketplace-dev.git
+meta git clone git@github.com:rsksmart/rif-marketplace-dev.git
 
 cd rif-marketplace-dev
 ```
 
-### 1.1. Starting docker
-Now you can start docker with
+### 1.1. Deploying smart contracts
+
+To deploy all the contracts and start a local blockchain in pm2, execute
 ```
-docker-compose up
-```
-
-The Ganache blockchain will now run and it is available to deploy the corresponding Smart Contracts.
-
-
-### 1.2. Deploying smart contracts
-First, install the dependencies (make sure to **use node v10**, you can switch using `nvm use 10`). 
-
-```
-sh install.sh rns storage
+npm run contracts:config
 ```
 
-Run the deployment script for the RNS and Marketplace contracts deploying to ganache network
+To only deploy the contracts:
 ```
-sh deploy.sh rns storage
+npm run contracts:deploy
 ```
 
-This will create `./out` folder with a number of configuration files:
+To re-deploy the contracts:
+```
+npm run contracts:redeploy
+```
 
-- `ui-config.json` - the configuration file for the [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui). This contains information for all the networks which are deployed. This should be put in the `rif-marketplace-ui/src/ui-config.json`.
-- `cache-[network]-config.json` - Specific per network configuration file for the [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache) service. The configuration should be in `rif-marketplace-cache/config/local.json`.
-- `rnsAdmin-[network]-config.json` - Per network conguration file for the [RNS Domains Manager](https://github.com/rnsdomains/rns-manager-react). The configuration should be in `rns-manager-react/src/config/contracts.local.json`.
-- `rooms-[network].json` - Rooms attribute for the [RIF Communications Pubsub Bootnode](https://github.com/rsksmart/rif-communications-pubsub-bootnode) configuration file.
+If you want to deploy to other chain than local, use an appropriate script: `npm run contracts:*`. For more detailed setup refer to the contracts folders.
 
 
-### 1.3. Browser wallet
+**Attention: the scripts automatically copy addresses to all repo folders. Don't push those files if you re-deployed locally with different addresses or if you deployed to a non-local chain as a non-release process.**
+
+### 1.2. Browser wallet
 In MetaMask or Nifty import the first address from `keys.txt` file. The private key is `0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d`
 
 Connect to the local ganache network (Localhost 8545 in the network dropdown). You should now see a balance of 99 ETH (or close to that - some gas was already used to deploy the Contracts)
@@ -109,6 +111,9 @@ You can similarly add more accounts to your wallet if needed.
 ### 1.4. IPFS Nodes
 
 For this setup you will need at least two running instances of **IPFS**. These can be spawned and ran easily through the **RIF Storage Pinning** repository, which will provide two instances already configured and ready to be used by the **RIF Marketplace**.
+
+> The nodes are automatically started via the main setup. If you want to run them in the terminal or with pm2 on your own, execute the commands `npm run pinner:ipfs:*` from the `package.json`. For the detailed setup, please refer to the pinner repository.
+
 
 Download and setup the Pinning service
 ```
@@ -134,6 +139,10 @@ You should now have two instances of **IPFS** running on ports `5002` and `5003`
 
 
 ## 2. RIF Communications Pubsub Bootnode
+
+**Temprarily disabled and not downloaded. libp2p communication has been potsponed. Skip this paragraph.**
+
+
 Download and setup the RIF Communications Pubsub Bootnode
 ```
 git clone git@github.com:rsksmart/rif-communications-pubsub-bootnode.git
@@ -164,7 +173,12 @@ NODE_ENV=development npm run start
 
 
 ## 3. RIF Marketplace Cache
+
+> Cache is automatically started via the main setup. If you want to run them in the terminal, execute `npm run cache` or with pm2 `npm run cache:start:pm2`. Other basic commands are available under `npm run cache:*`. For the detailed setup, please refer to the cache repository.
+
+
 Download and setup the RIF Marketplace Cache
+
 ```
 git clone git@github.com:rsksmart/rif-marketplace-cache.git
 
@@ -193,6 +207,10 @@ NODE_ENV=ganache npm run bin -- start --enable rns storage --log=debug
 ```
 
 ## 4. RIF Marketplace Upload Service
+
+> Upload Service is automatically started via the main setup. If you want to run them in the terminal, execute `npm run upload-service` or with pm2 `npm run upload-service:start:pm2`. Other basic commands are available under `npm run upload-service:*`. For the detailed setup, please refer to the repository.
+
+
 Download and setup the RIF Marketplace Upload Service
 ```
 git clone git@github.com:rsksmart/rif-marketplace-upload-service.git
@@ -217,6 +235,10 @@ NODE_ENV=development npm run bin start -- --log=debug
 
 
 ## 5. RIF Marketplace UI
+
+> UI is automatically started via the main setup. If you want to run them in the terminal, execute `npm run dapp` or with pm2 `npm run dapp:start:pm2`. For the detailed setup, please refer to the repository.
+
+
 Download and setup the RIF Marketplace UI
 ```
 git clone git@github.com:rsksmart/rif-marketplace-ui.git
@@ -237,6 +259,10 @@ npm start
 
 
 ## 6. RNS Manager
+
+> RNS Manager is automatically started via the main setup. If you want to run them in the terminal, execute `npm run rns-manager` or with pm2 `npm run rns-manager:start:pm2`. For the detailed setup, please refer to the repository.
+
+
 Download and setup the RNS Manager
 ```
 git clone git@github.com:rnsdomains/rns-manager-react.git
@@ -263,6 +289,9 @@ npm start
 
 > This is a service that listens on blockchain events and when new Agreement is created it pins a file to the configured IPFS node.
 
+> Pinner Service is automatically started via the main setup. If you want to run it in the terminal, execute `npm run pinner` or with pm2 `npm run pinner:start:pm2`. Other basic commands are available under `npm run pinner:*`. For the detailed setup, please refer to the repository.
+
+
 Download and setup the Pinning service (already done when running **IPFS** nodes)
 ```
 $ git clone git@github.com:rsksmart/rif-storage-pinner.git
@@ -288,6 +317,12 @@ NODE_ENV=ganache npm run bin daemon -- --log=debug --db=./db.sqlite
 
 You should see in logs when new Agreements are detected and pinned. 
 
+## 8. RIF Notifier service
+
+```
+TO BE FILLED...
+```
+
 **See help pages for details on the parameters and additional commands!!!**
 
 # Using the RIF Marketplace
@@ -299,6 +334,10 @@ Go through the normal RNS registration flow but each time you make transaction y
 sh forward.sh
 ```
 
+Alternatively, you can start a mining local blockchain with the command `npm run ganache-cli:mining`. It will mine a block every 15 seconds.
+
 # Troubleshooting
 ### RNS manager missmatch between networks
 Solution: switch back and forth a network on MetaMask/Nifty. If that does not work make sure you have setup correctly the network id in the RNS step.
+
+If you encounter more issues, please refer to the [Troubleshooting Guide](https://hackmd.io/@rsk-infra-protocols/HJeABR-T_)

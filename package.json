@@ -49,7 +49,7 @@
     "dapp": "cd dapp && npm start && cd ..",
     "mkp:config": "npm run contracts:config && npm run cache:config",
     "all:config": "npm run contracts:config && npm run upload-service:config && npm run pinner:config && npm run cache:config",
-    "mkp:start:pm2": "npm run cache:start:pm2 && npm run dapp:pm2",
+    "mkp:start:pm2": "npm run cache:start:pm2 && npm run dapp:start:pm2",
     "all:start:pm2": "npm run cache:start:pm2 && npm run pinner:ipfs:provider:pm2 && npm run pinner:ipfs:consumer:pm2 && npm run pinner:start:pm2 && npm run upload-service:start:pm2 && npm run rns-manager:start:pm2 && npm run dapp:start:pm2",
     "mkp": "npm run mkp:install && npm run mkp:config && npm run mkp:start:pm2",
     "all": "npm run all:install && npm run all:config && npm run all:start:pm2"
