@@ -1,6 +1,6 @@
 # RIF Marketplace developers guide
 
-This project provides an easy to use developers environment for the **RIF Marketplace** project. If contains a multitude of scripts in the `package.json` file. It installs and sets up all the required components to run the **RNS Name Services**, **Storage Pinning Services** and **Notifier Services (wip)**.
+Thhis project provides an easy to use developer environment for the **RIF Marketplace** project via a number of scripts in the `package.json` file. It installs and sets up all the required components to run the **RNS Name Services**, **Storage Pinning Services** and **Notifier Services (wip)**. (Currently, with the exception of the libp2p *[pubsub module](https://github.com/rsksmart/rif-communications-pubsub)* that forms the communication layer between the cache and the storage services)
 
 ### Table of content:
 - [Dependencies](#dependencies)
@@ -28,7 +28,7 @@ This project provides an easy to use developers environment for the **RIF Market
 # Dependencies
 
 ## Prerequisities
-0. node v10 (or [nvm](https://github.com/nvm-sh/nvm) or [n](https://github.com/tj/n) with node v10 installed (**to be upgraded**))
+0. node v10 (installed directly, or using your favourite Node.js manager, such as [fnm](https://github.com/Schniz/fnm), [nvm](https://github.com/nvm-sh/nvm), [n](https://github.com/tj/n), etc)(**to be upgraded**)
 1. [meta](https://github.com/mateodelnorte/meta) is used for bulk repo and tasks management. `npm i -g meta`
 2. [pm2](https://github.com/Unitech/pm2) is used for processes and logs management in the local environment. `npm i -g pm2`
 3. [IPFS](https://ipfs.io/) The recommended way to install IPFS is using [ipfs-update](https://github.com/ipfs/ipfs-update) but there are other ways described [here](https://github.com/ipfs/go-ipfs#install) as well. Recommended is to run the latest version but required is at least `0.7.0`. (used for the storage setup only)
@@ -79,8 +79,16 @@ cd rif-marketplace-dev
 
 ### 1.1. Starting local blockchain
 Now you can start local blockchain in terminal, pm2 or docker with
+
+Terminal
 ```
-npm run ganache-cli or npm run ganache-cli:mining or npm run ganache-cli:pm2
+npm run ganache-cli
+npm run ganache-cli:mining
+```
+
+pm2
+```
+npm run ganache-cli:pm2
 ```
 
 Docker
@@ -354,7 +362,7 @@ Go through the normal RNS registration flow but each time you make transaction y
 sh forward.sh
 ```
 
-Alternatively, you can start a mining local blockchain with the command `npm run ganache-cli:mining`. It will mine a block every 15 seconds.
+Alternatively, you can start a mining local blockchain with the command `npm run ganache-cli:mining`. It will mine a block every 15 seconds. You can change the blocktime in the `package.json` script.
 
 # Troubleshooting
 ### RNS manager missmatch between networks
