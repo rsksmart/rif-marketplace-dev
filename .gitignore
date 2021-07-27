@@ -1,4 +1,11 @@
-data
-out
-
+/data/
+/out/
+/node_modules/
 .DS_Store
+
+/cache/
+/dapp/
+/pinner/
+/upload-service/
+/rns-manager/
+/notifier/

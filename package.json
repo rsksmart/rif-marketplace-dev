@@ -1,0 +1,88 @@
+{
+  "name": "rif-marketplace-meta",
+  "version": "1.0.0",
+  "description": "meta repository for convenient and fast local development of the rif marketplace",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "node:install": "npm i && meta npm install --include-only $npm_package_config_node_dirs --parallel",
+    "mkp:install": "npm i && meta npm install --include-only $npm_package_config_mkp_dirs --parallel",
+    "all:install": "npm run node:install",
+    "ganache-cli": "npx ganache-cli -d --db=./data/ganache/database --networkId=8545 --verbose=true --gasLimit=10000000 --allowUnlimitedContractSize",
+    "ganache-cli:mining": "npx ganache-cli -d --db=./data/ganache/database --networkId=8545 --verbose=true --gasLimit=10000000 --allowUnlimitedContractSize --blockTime=15",
+    "ganache-cli:pm2": "pm2 start npx --name=ganache -- ganache-cli -d --db=./data/ganache/database --networkId=8545 --verbose=true --gasLimit=10000000 --allowUnlimitedContractSize",
+    "contracts:deploy": "meta exec \"npx truffle migrate --network ganache\" --include-only $npm_package_config_contracts",
+    "contracts:redeploy": "meta exec \"npx truffle migrate --network ganache --reset\" --include-only $npm_package_config_contracts",
+    "contracts:deploy:rns": "cd rns-dev && npx truffle migrate --network ganache && cd ..",
+    "contracts:redeploy:rns": "cd rns-dev && npx truffle migrate --network ganache --reset && cd ..",
+    "contracts:deploy:storage": "cd storage-dev && npx truffle migrate --network ganache && cd ..",
+    "contracts:redeploy:storage": "cd storage-dev && npx truffle migrate --network ganache --reset && cd ..",
+    "contracts:deploy:notifier": "cd notifier-dev && npx truffle migrate --network ganache && cd ..",
+    "contracts:redeploy:notifier": "cd notifier-dev && npx truffle migrate --network ganache --reset && cd ..",
+    "contracts:deploy:devnet": "meta exec \"npx truffle migrate --network rskdevnet\" --include-only $npm_package_config_contracts",
+    "contracts:redeploy:devnet": "meta exec \"npx truffle migrate --network rskdevnet --reset\" --include-only $npm_package_config_contracts",
+    "contracts:deploy:testnet": "meta exec \"npx truffle migrate --network rsktestnet\" --include-only $npm_package_config_contracts",
+    "contracts:deploy:mainnet": "meta exec \"npx truffle migrate --network rskmainnet\" --include-only $npm_package_config_contracts",
+    "contracts:create-config": "node scripts/createConfig.js rns storage notifier",
+    "contracts:config": "npm run ganache-cli:pm2 && npm run contracts:deploy && npm run contracts:create-config",
+    "upload-service:config": "cd upload-service && npm run bin -- db-migration --up && cd ..",
+    "upload-service:start:pm2": "cd upload-service && NODE_ENV=development pm2 start npm --name=upload-service -- run bin start -- --log=debug && cd ..",
+    "upload-service:start": "cd upload-service && NODE_ENV=development npm run bin start -- --log=debug && cd ..",
+    "upload-service": "npm run upload-service:create-db && npm run upload-service:start",
+    "pinner:config": "cd pinner && npm run init && npm run bin -- init --offerId 0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1 --db=./db.sqlite && cd ..",
+    "pinner:ipfs:consumer": "cd pinner && npm run ipfs:consumer daemon && cd ..",
+    "pinner:ipfs:provider": "cd pinner && npm run ipfs:provider daemon && cd ..",
+    "pinner:ipfs:provider:pm2": "cd pinner && pm2 start npm --name=ipfs-provider -- run ipfs:provider -- daemon && cd ..",
+    "pinner:ipfs:consumer:pm2": "cd pinner && pm2 start npm --name=ipfs-consumer -- run ipfs:consumer -- daemon && cd ..",
+    "pinner:start:pm2": "cd pinner && NODE_ENV=ganache pm2 start npm --name=pinner -- run bin daemon -- --log=debug --db=./db.sqlite && cd ..",
+    "pinner:start": "cd pinner && NODE_ENV=ganache npm run bin daemon -- --log=debug --db=./db.sqlite && cd ..",
+    "pinner": "npm run pinner:init && npm run pinner:start",
+    "cache:create-db": "cd cache && npm run bin -- db-migration --up && cd ..",
+    "cache:precache": "cd cache && NODE_ENV=ganache npm run bin precache all && cd ..",
+    "cache:config": "npm run cache:create-db && npm run cache:precache",
+    "cache:start:pm2": "cd cache && NODE_ENV=ganache pm2 start npm --name=cache -- run bin -- start --enable rns storage notifier --log=debug && cd ..",
+    "cache:start": "cd cache && NODE_ENV=ganache npm run bin -- start --enable rns storage notifier --log=debug && cd ..",
+    "cache": "npm run cache:config && npm run cache:start",
+    "rns-manager:start:pm2": "cd rns-manager && REACT_APP_URL=http://localhost:3001/ pm2 start npm --name=rns-manager -- start && cd ..",
+    "rns-manager": "cd rns-manager && REACT_APP_URL=http://localhost:3001/ npm start && cd ..",
+    "dapp:start:pm2": "cd dapp && REACT_APP_NETWORK=ganache pm2 start npm --name=dapp -- start && cd ..",
+    "dapp": "cd dapp && npm start && cd ..",
+    "mkp:config": "npm run contracts:config && npm run cache:config",
+    "all:config": "npm run contracts:config && npm run upload-service:config && npm run pinner:config && npm run cache:config",
+    "mkp:start:pm2": "npm run cache:start:pm2 && npm run dapp:start:pm2",
+    "all:start:pm2": "npm run cache:start:pm2 && npm run pinner:ipfs:provider:pm2 && npm run pinner:ipfs:consumer:pm2 && npm run pinner:start:pm2 && npm run upload-service:start:pm2 && npm run rns-manager:start:pm2 && npm run dapp:start:pm2",
+    "mkp:config:start": "npm run mkp:config && npm run mkp:start:pm2",
+    "all:config:start": "npm run all:config && npm run all:start:pm2",
+    "mkp": "npm run mkp:install && npm run mkp:config && npm run mkp:start:pm2",
+    "all": "npm run all:install && npm run all:config && npm run all:start:pm2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsksmart/rif-marketplace-dev.git"
+  },
+  "keywords": [
+    "rif",
+    "marketplace",
+    "meta",
+    "dev"
+  ],
+  "author": "Artem Brazhnikov",
+  "license": "MIT",
+  "config": {
+    "contracts": "rns-dev,storage-dev,notifier-dev",
+    "mkp_dirs": "rns-dev,storage-dev,notifier-dev,cache,dapp",
+    "node_dirs": "rns-dev,storage-dev,notifier-dev,cache,dapp,pinner,upload-service,rns-manager",
+    "all_apps": "cache,dapp,pinner,upload-service,rns-manager",
+    "mkp_apps": "cache,dapp"
+  },
+  "bugs": {
+    "url": "https://github.com/rsksmart/rif-marketplace-dev/issues"
+  },
+  "homepage": "https://github.com/rsksmart/rif-marketplace-dev#readme",
+  "devDependencies": {
+    "meta-npm": "^1.2.7"
+  },
+  "dependencies": {
+    "json5": "^2.2.0"
+  }
+}
