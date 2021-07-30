@@ -69,12 +69,12 @@ networks.forEach(network => {
   }
 
 // RIF Notifier config
-  if (args.includes('rif-notifier') && network === 'ganache') {
+  if (args.includes('rif-notifier')) {
     const notifierConfigPath = "./notifier/config/config-";
     const file = notifierConfigPath + network + ".json";
     if (fs.existsSync(file))
       configTemplateJson = JSON.parse(fs.readFileSync(file));
-      configTemplateJson.notificationManagerContract = notifierConfig[network].notifierManager
+      configTemplateJson.notificationmanagercontract = notifierConfig[network].notifierManager
       fs.writeFileSync('./out/rif-notifier-config.json', JSON.stringify(configTemplateJson, null, 4));
   }
 
@@ -98,7 +98,7 @@ networks.forEach(network => {
   if (storageConfig[network]) {
     uiConfig[network].contractAddresses.storageManager = storageConfig[network].storageManager;
     uiConfig[network].contractAddresses.storageStaking = storageConfig[network].staking;
-    uiConfig[network].servicesistorage = serviceProps;
+    uiConfig[network].services.storage = serviceProps;
   }
   // Notifier
   if (notifierConfig[network]) {
