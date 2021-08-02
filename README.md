@@ -341,6 +341,8 @@ You should see in logs when new Agreements are detected and pinned.
 
 RIF Notifier is a service that listens to events on the blockchain and notifies its users of the blockchain events using one of the supported notification methods (API/SMS/EMAIL)
 
+RIF Notifier is automatically started via the main setup. If you want to run it in the terminal, execute `npm run notifier` or with pm2 `npm run notifer:start:pm2`. Other basic commands are available under `npm run notifer:*`. For the detailed setup, please refer to the repository.
+
 Download and setup the rif-notifier service
 
 ```

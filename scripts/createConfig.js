@@ -66,16 +66,15 @@ networks.forEach(network => {
     const file = notifierConfigPath + network + ".json";
     if (fs.existsSync(file))
       notifierConfig[network] = JSON.parse(fs.readFileSync(file));
-  }
+    
 
-// RIF Notifier config
-  if (args.includes('rif-notifier')) {
-    const notifierConfigPath = "./notifier/config/config-";
-    const file = notifierConfigPath + network + ".json";
-    if (fs.existsSync(file))
-      configTemplateJson = JSON.parse(fs.readFileSync(file));
-      configTemplateJson.notificationmanagercontract = notifierConfig[network].notifierManager
+    const rifNotifierConfigPath = "./notifier/config/config-";
+    const rifNotifierConfigFile = rifNotifierConfigPath + network + ".json";
+    if (fs.existsSync(rifNotifierConfigFile))  {
+      configTemplateJson = JSON.parse(fs.readFileSync(rifNotifierConfigFile));
+      notifierConfig[network] && (configTemplateJson.notificationmanagercontract = notifierConfig[network].notifierManager)
       fs.writeFileSync('./out/rif-notifier-config.json', JSON.stringify(configTemplateJson, null, 4));
+    }
   }
 
 
