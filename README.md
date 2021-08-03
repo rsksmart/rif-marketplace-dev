@@ -339,9 +339,49 @@ You should see in logs when new Agreements are detected and pinned.
 
 ## 8. RIF Notifier service
 
+RIF Notifier is a service that listens to events on the blockchain and notifies its users of the blockchain events using one of the supported notification methods (API/SMS/EMAIL)
+
+RIF Notifier is automatically started via the main setup. If you want to run it in the terminal, execute `npm run notifier` or with pm2 `npm run notifer:start:pm2`. Other basic commands are available under `npm run notifer:*`. For the detailed setup, please refer to the repository.
+
+Download and setup the rif-notifier service
+
 ```
-TO BE FILLED...
+$ git clone git@github.com:rsksmart/rif-notifier.git
+$ cd rif-notifier
 ```
+
+1. To install java, maven and mysql for first time run the script, and input password values when prompted for mysql. If you have already installed mysql, skip to step 3.
+
+```
+$ bin/meta-install.sh
+```
+
+2. To secure the mysql installation for first time, run the script
+
+```
+$ bin/mysqlunattended.sh
+```
+
+3. For existing mysql installation, use the script to create notifier_user
+```
+$ bin/install.sh
+```
+
+4. Install notifier-prov-cli using steps in https://github.com/rsksmart/rif-notifier/tree/master/notifier-prov-cli
+
+5. To configure rif-notifier with other required parameters, see the help for command below. (Ensure all the required parameters are set. For sample configuration see ```config/config-ganache.json```)
+
+```
+notifier-prov-cli configure --help
+```
+6. To start rif-notifier
+``` 
+notifier-prov-cli start 
+```
+
+In case of permission issues, run using `sudo`
+
+For more information about usage of rif-notifier see https://github.com/rsksmart/rif-notifier
 
 **See help pages for details on the parameters and additional commands!!!**
 
