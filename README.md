@@ -52,7 +52,7 @@ These repositories will be cloned and installed during the tutorial
 ## Quick Start
 
 1. `meta git clone git@github.com:rsksmart/rif-marketplace-dev.git` - will clone the meta dev repository and recursively clone the nested ones. In case you cloned the repo with the standard git command, simply execute - `meta git update` inside of the repo.
-2. Execute `npm run all` or `npm run mkp`
+2. Go to the cloned folder (`cd rif-marketplace-dev`) and execute `npm run all` or `npm run mkp`
 
     - `npm run all` - will install all the dependencies, configure project with default options for the local setup, and start services and applications via `pm2` manager.
     - `npm run mkp` - will do the same, but only for the contracts, cache and dapp.
@@ -130,7 +130,7 @@ The `contracts:create-config` will generate the files below and copy the contrac
 
 **Attention: the scripts automatically copy addresses to all repo folders. Don't push those files if you re-deployed locally with different addresses or if you deployed to a non-local chain as a non-release process.**
 
-### 1.2. Browser wallet
+### 1.3. Browser wallet
 
 In MetaMask or Nifty import the first address from `keys.txt` file. The private key is `0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d`
 
