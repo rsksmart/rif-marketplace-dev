@@ -25,8 +25,6 @@ This project provides an easy to use developers environment for the **RIF Market
   - [Registering domains using RNS](#registering-domains-using-rns)
 - [Troubleshooting](#troubleshooting)
 
-## Dependencies
-
 ## Prerequisities
 
 0. node v10 (or [nvm](https://github.com/nvm-sh/nvm) or [n](https://github.com/tj/n) with node v10 installed (**to be upgraded**))
@@ -55,11 +53,14 @@ These repositories will be cloned and installed during the tutorial
 2. Go to the cloned folder (`cd rif-marketplace-dev`) and execute `npm run all` or `npm run mkp`
 
     - `npm run all` - will install all the dependencies, configure project with default options for the local setup, and start services and applications via `pm2` manager.
+        _Note_: This command will also install [Java 11](https://www.java.com/), [Maven](https://maven.apache.org/), [MySQL 8](https://www.mysql.com/) and [Python 3](https://www.python.org/) during notifier installation phasse, if they are not already installed.
     - `npm run mkp` - will do the same, but only for the contracts, cache and dapp.
 
 3. Use `pm2` to see the list of running processes (`pm2 list`), logs(`pm2 logs <id|name>`), etc.
    You should see the result similar to this one
    ![pm2-list](/assets/images/pm2-list.png)
+
+If desired, use `pm2 stop all` to stop all the processes.
 
 `meta` tool provides a convenient interface to work with multiple repositories simultaneously. There are different plugins for bulk operations, including `git` and `npm`. Some examples are:
 
