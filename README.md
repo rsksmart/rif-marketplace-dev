@@ -4,9 +4,8 @@ This project provides an easy to use developers environment for the **RIF Market
 
 ## Table of content
 
-- [Dependencies](#dependencies)
-  - [Prerequisities](#prerequisities)
-  - [Part of tutorial](#part-of-tutorial)
+- [Prerequisities](#prerequisities)
+- [Part of tutorial](#part-of-tutorial)
 - [Quick Start](#quick-start)
 - [Detailed Setup](#detailed-setup)
   1. [Developers Environment](#developers-environment)
@@ -52,9 +51,9 @@ These repositories will be cloned and installed during the tutorial
 1. `meta git clone git@github.com:rsksmart/rif-marketplace-dev.git` - will clone the meta dev repository and recursively clone the nested ones. In case you cloned the repo with the standard git command, simply execute - `meta git update` inside of the repo.
 2. Go to the cloned folder (`cd rif-marketplace-dev`) and execute `npm run all` or `npm run mkp`
 
-    - `npm run all` - will install all the dependencies, configure project with default options for the local setup, and start services and applications via `pm2` manager.
-        _Note_: This command will also install [Java 11](https://www.java.com/), [Maven](https://maven.apache.org/), [MySQL 8](https://www.mysql.com/) and [Python 3](https://www.python.org/) during notifier installation phasse, if they are not already installed.
-    - `npm run mkp` - will do the same, but only for the contracts, cache and dapp.
+   - `npm run all` - will install all the dependencies, configure project with default options for the local setup, and start services and applications via `pm2` manager.
+     _Note_: This command will also install [Java 11](https://www.java.com/), [Maven](https://maven.apache.org/), [MySQL 8](https://www.mysql.com/) and [Python 3](https://www.python.org/) during notifier installation phasse, if they are not already installed.
+   - `npm run mkp` - will do the same, but only for the contracts, cache and dapp.
 
 3. Use `pm2` to see the list of running processes (`pm2 list`), logs(`pm2 logs <id|name>`), etc.
    You should see the result similar to this one
@@ -78,7 +77,7 @@ Please refer to the documentation for more details.
 
 Download and setup the RIF Marketplace Developer Environment
 
-``` sh
+```sh
 meta git clone git@github.com:rsksmart/rif-marketplace-dev.git
 
 cd rif-marketplace-dev
@@ -88,13 +87,13 @@ cd rif-marketplace-dev
 
 Now you can start local blockchain in terminal, pm2 or docker with
 
-``` sh
+```sh
 npm run ganache-cli or npm run ganache-cli:mining or npm run ganache-cli:pm2
 ```
 
 Docker
 
-``` sh
+```sh
 docker-compose up
 ```
 
@@ -104,19 +103,19 @@ The Ganache blockchain will now run and it is available to deploy the correspond
 
 To deploy all the contracts and start a local blockchain in pm2, execute
 
-``` sh
+```sh
 npm run contracts:config
 ```
 
 To only deploy the contracts:
 
-``` sh
+```sh
 npm run contracts:deploy
 ```
 
 To re-deploy the contracts:
 
-``` sh
+```sh
 npm run contracts:redeploy
 ```
 
@@ -149,7 +148,7 @@ For this setup you will need at least two running instances of **IPFS**. These c
 
 Download and setup the Pinning service
 
-``` sh
+```sh
 git clone git@github.com:rsksmart/rif-storage-pinner.git
 cd rif-storage-pinner
 npm ci
@@ -157,13 +156,13 @@ npm ci
 
 Initialize development repos that are placed in `.repos`. This folder can be anytime removed and the `init` command rerun. All data will be purged though.
 
-``` sh
+```sh
 npm run init
 ```
 
 Spawn IPFS daemons
 
-``` sh
+```sh
 npm run ipfs:consumer daemon
 npm run ipfs:provider daemon
 ```
@@ -178,7 +177,7 @@ You should now have two instances of **IPFS** running on ports `5002` and `5003`
 
 Download and setup the RIF Communications Pubsub Bootnode
 
-``` sh
+```sh
 git clone git@github.com:rsksmart/rif-communications-pubsub-bootnode.git
 
 cd rif-communications-pubsub-bootnode
@@ -186,13 +185,13 @@ cd rif-communications-pubsub-bootnode
 
 Install the dependencies
 
-``` sh
+```sh
 npm ci
 ```
 
 Copy the `rooms` attribute from the configuration file generated in step [1.2](#1.2.Deploying-smart-contracts) from `rif-marketplace-dev/out/rooms-ganache.json`. Include this attribute in the `development.json5` file. It should look like:
 
-``` json
+```json
 {
   peerId: { ... },
   rooms: [ "8545:0xddb64fe46a91d46ee29420539fc25fd07c5fea3e:0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
@@ -204,7 +203,7 @@ Copy the `rooms` attribute from the configuration file generated in step [1.2](#
 
 Run the Pubsub Bootnode with
 
-``` sh
+```sh
 NODE_ENV=development npm run start
 ```
 
@@ -214,7 +213,7 @@ NODE_ENV=development npm run start
 
 Download and setup the RIF Marketplace Cache
 
-``` sh
+```sh
 git clone git@github.com:rsksmart/rif-marketplace-cache.git
 
 cd rif-marketplace-cache
@@ -222,25 +221,25 @@ cd rif-marketplace-cache
 
 Install the dependencies
 
-``` sh
+```sh
 npm ci
 ```
 
 Create the DB using the following command:
 
-``` sh
+```sh
 npm run bin -- db-migration --up
 ```
 
 Run Precache process for the RNS Service (for ganache network)
 
-``` sh
+```sh
 NODE_ENV=ganache npm run bin precache rns storage
 ```
 
 Run the cache for the RNS Service with
 
-``` sh
+```sh
 NODE_ENV=ganache npm run bin -- start --enable rns storage --log=debug
 ```
 
@@ -250,7 +249,7 @@ NODE_ENV=ganache npm run bin -- start --enable rns storage --log=debug
 
 Download and setup the RIF Marketplace Upload Service
 
-``` sh
+```sh
 git clone git@github.com:rsksmart/rif-marketplace-upload-service.git
 
 cd rif-marketplace-upload-service
@@ -258,19 +257,19 @@ cd rif-marketplace-upload-service
 
 Install the dependencies
 
-``` sh
+```sh
 npm ci
 ```
 
 Create the DB using the following command:
 
-``` sh
+```sh
 npm run bin -- db-migration --up
 ```
 
 Run Upload Service (connected to previously deployed IPFS node)
 
-``` sh
+```sh
 NODE_ENV=development npm run bin start -- --log=debug
 ```
 
@@ -280,7 +279,7 @@ NODE_ENV=development npm run bin start -- --log=debug
 
 Download and setup the RIF Marketplace UI
 
-``` sh
+```sh
 git clone git@github.com:rsksmart/rif-marketplace-ui.git
 
 cd rif-marketplace-ui
@@ -288,13 +287,13 @@ cd rif-marketplace-ui
 
 Install the dependencies
 
-``` sh
+```sh
 npm ci
 ```
 
 Run the UI (Will be available on `http://localhost:3000/`)
 
-``` sh
+```sh
 npm start
 ```
 
@@ -304,7 +303,7 @@ npm start
 
 Download and setup the RNS Manager
 
-``` sh
+```sh
 git clone git@github.com:rnsdomains/rns-manager-react.git
 
 cd rns-manager-react
@@ -312,7 +311,7 @@ cd rns-manager-react
 
 Install the dependencies
 
-``` sh
+```sh
 npm i
 ```
 
@@ -320,7 +319,7 @@ Copy the configuration file generated in step [1.2](#1.2.Deploying-smart-contrac
 
 Now you can start the UI (You may need to switch to another port such as `http://localhost:3001` if you are already running the RIF Marketplace UI)
 
-``` sh
+```sh
 npm start
 ```
 
@@ -331,7 +330,7 @@ npm start
 
 Download and setup the Pinning service (already done when running **IPFS** nodes)
 
-``` sh
+```sh
 git clone git@github.com:rsksmart/rif-storage-pinner.git
 cd rif-storage-pinner
 npm ci
@@ -341,7 +340,7 @@ Make sure you have **IPFS** installed. We will use one of the previously deploye
 
 To interact with pinning service use the `npm run bin` script. To start Pinning service run:
 
-``` sh
+```sh
 npm run bin -- init --offerId={your_account} --db=./db.sqlite
 ```
 
@@ -349,7 +348,7 @@ This will provide the `peerId` that should be used in the _RIF Marketplace UI_ t
 
 Once the offer is created in the UI you can run the service using:
 
-``` sh
+```sh
 NODE_ENV=ganache npm run bin daemon -- --log=debug --db=./db.sqlite
 ```
 
@@ -363,42 +362,42 @@ RIF Notifier is automatically started via the main setup. If you want to run it 
 
 Download and setup the rif-notifier service
 
-``` sh
+```sh
 git clone git@github.com:rsksmart/rif-notifier.git
 cd rif-notifier
 ```
 
 1. To install java, maven and mysql for first time run the script, and input password values when prompted for mysql. If you have already installed mysql, skip to step 3.
 
-    ``` sh
-    bin/meta-install.sh
-    ```
+   ```sh
+   bin/meta-install.sh
+   ```
 
 2. To secure the mysql installation for first time, run the script
 
-    ``` sh
-    bin/mysqlunattended.sh
-    ```
+   ```sh
+   bin/mysqlunattended.sh
+   ```
 
 3. For existing mysql installation, use the script to create notifier_user
 
-    ``` sh
-    bin/install.sh
-    ```
+   ```sh
+   bin/install.sh
+   ```
 
 4. Install notifier-prov-cli using the steps [here](https://github.com/rsksmart/rif-notifier/tree/master/notifier-prov-cli)
 
 5. To configure rif-notifier with other required parameters, see the help for command below. (Ensure all the required parameters are set. For sample configuration see `config/config-ganache.json`)
 
-    ``` sh
-    notifier-prov-cli configure --help
-    ```
+   ```sh
+   notifier-prov-cli configure --help
+   ```
 
 6. To start rif-notifier
 
-    ``` sh
-    notifier-prov-cli start
-    ```
+   ```sh
+   notifier-prov-cli start
+   ```
 
 In case of permission issues, run using `sudo`
 
