@@ -2,32 +2,30 @@
 
 This project provides an easy to use developers environment for the **RIF Marketplace** project. If contains a multitude of scripts in the `package.json` file. It installs and sets up all the required components to run the **RNS Name Services**, **Storage Pinning Services** and **Notifier Services (wip)**.
 
-### Table of content:
-- [Dependencies](#dependencies)
-    - [Prerequisities](#prerequisities)
-    - [Part of tutorial](#part-of-tutorial)
+## Table of content
+
+- [Prerequisities](#prerequisities)
+- [Part of tutorial](#part-of-tutorial)
 - [Quick Start](#quick-start)
 - [Detailed Setup](#detailed-setup)
-    1. [Developers Environment](#developers-environment)
-        1. [Starting local blockchain](#11-starting-local-blockchain)
-        2. [Deploying smart contracts](#12-deploying-smart-contracts)
-        3. [Browser wallet](#13-browser-wallet)
-        4. [IPFS Nodes](#14-ipfs-nodes)
-    2. [RIF Communications Pubsub BootNode](#2-rif-communications-pubsub-bootnode)
-    3. [RIF Marketplace Cache](#3-rif-marketplace-cache)
-    4. [RIF Marketplace Upload Service](#4-rif-marketplace-upload-service)
-    5. [RIF Marketplace UI](#5-rif-marketplace-ui)
-    6. [RNS Manager](#6-rns-manager)
-    7. [RIF Storage Pinning service](#7-rif-storage-pinning-service)
-    8. [RIF Notifier Service](#8-rif-notifier-service)
+  1. [Developers Environment](#developers-environment)
+     1. [Starting local blockchain](#11-starting-local-blockchain)
+     2. [Deploying smart contracts](#12-deploying-smart-contracts)
+     3. [Browser wallet](#13-browser-wallet)
+     4. [IPFS Nodes](#14-ipfs-nodes)
+  2. [RIF Communications Pubsub BootNode](#2-rif-communications-pubsub-bootnode)
+  3. [RIF Marketplace Cache](#3-rif-marketplace-cache)
+  4. [RIF Marketplace Upload Service](#4-rif-marketplace-upload-service)
+  5. [RIF Marketplace UI](#5-rif-marketplace-ui)
+  6. [RNS Manager](#6-rns-manager)
+  7. [RIF Storage Pinning service](#7-rif-storage-pinning-service)
+  8. [RIF Notifier Service](#8-rif-notifier-service)
 - Using the RIF Marketplace
-    - [Registering domains using RNS](#registering-domains-using-rns)
-- [Troubleshooting](#troubleshooting) 
-
-
-# Dependencies
+  - [Registering domains using RNS](#registering-domains-using-rns)
+- [Troubleshooting](#troubleshooting)
 
 ## Prerequisities
+
 0. node v10 (or [nvm](https://github.com/nvm-sh/nvm) or [n](https://github.com/tj/n) with node v10 installed (**to be upgraded**))
 1. [meta](https://github.com/mateodelnorte/meta) is used for bulk repo and tasks management. `npm i -g meta`
 2. [pm2](https://github.com/Unitech/pm2) is used for processes and logs management in the local environment. `npm i -g pm2`
@@ -36,10 +34,11 @@ This project provides an easy to use developers environment for the **RIF Market
 5. [Docker compose](https://docs.docker.com/compose/install/) (optional, only if you use docker setup)
 
 ## Part of tutorial
+
 These repositories will be cloned and installed during the tutorial
 
-1. [RIF Marketplace Developer Environment](https://github.com/rsksmart/rif-marketplace-dev/) project  
-1. **(Disabled)** [RIF Comms Pubsub BootNode](https://github.com/rsksmart/rif-communications-pubsub-bootnode) project  
+1. [RIF Marketplace Developer Environment](https://github.com/rsksmart/rif-marketplace-dev/) project
+1. **(Disabled)** [RIF Comms Pubsub BootNode](https://github.com/rsksmart/rif-communications-pubsub-bootnode) project
 1. [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache/) project
 1. [RIF Marketplace Upload Service](https://github.com/rsksmart/rif-marketplace-upload-service/) project
 1. [RIF Storage Pinning Service](https://github.com/rsksmart/rif-storage-pinner/) project
@@ -47,18 +46,23 @@ These repositories will be cloned and installed during the tutorial
 1. [RNS Manager Project](https://github.com/rnsdomains/rns-manager-react)
 1. [RIF Notifier Service](https://github.com/rsksmart/rif-notifier) project
 
-# Quick Start
+## Quick Start
 
 1. `meta git clone git@github.com:rsksmart/rif-marketplace-dev.git` - will clone the meta dev repository and recursively clone the nested ones. In case you cloned the repo with the standard git command, simply execute - `meta git update` inside of the repo.
-2. Execute `npm run all` or `npm run mkp`
-- `npm run all` - will install all the dependencies, configure project with default options for the local setup, and start services and applications via `pm2` manager.
-- `npm run mkp` - will do the same, but only for the contracts, cache and dapp.
-3. Use `pm2` to see the list of running processes (`pm2 list`), logs(`pm2 logs <id|name>`), etc.
-You should see the result similar to this one
-![pm2-list](/assets/images/pm2-list.png)
+2. Go to the cloned folder (`cd rif-marketplace-dev`) and execute `npm run all` or `npm run mkp`
 
+   - `npm run all` - will install all the dependencies, configure project with default options for the local setup, and start services and applications via `pm2` manager.
+     _Note_: This command will also install [Java 11](https://www.java.com/), [Maven](https://maven.apache.org/), [MySQL 8](https://www.mysql.com/) and [Python 3](https://www.python.org/) during notifier installation phasse, if they are not already installed.
+   - `npm run mkp` - will do the same, but only for the contracts, cache and dapp.
+
+3. Use `pm2` to see the list of running processes (`pm2 list`), logs(`pm2 logs <id|name>`), etc.
+   You should see the result similar to this one
+   ![pm2-list](/assets/images/pm2-list.png)
+
+If desired, use `pm2 stop all` to stop all the processes.
 
 `meta` tool provides a convenient interface to work with multiple repositories simultaneously. There are different plugins for bulk operations, including `git` and `npm`. Some examples are:
+
 - `meta git status`, `meta git status --include-only dir1,dir2`
 - `meta git update`
 - `meta git -b checkout branch-name`
@@ -67,50 +71,57 @@ You should see the result similar to this one
 
 Please refer to the documentation for more details.
 
+## Detailed Setup
 
-# Detailed Setup:
 ## 1. Developers Environment
+
 Download and setup the RIF Marketplace Developer Environment
-```
+
+```sh
 meta git clone git@github.com:rsksmart/rif-marketplace-dev.git
 
 cd rif-marketplace-dev
 ```
 
 ### 1.1. Starting local blockchain
+
 Now you can start local blockchain in terminal, pm2 or docker with
-```
+
+```sh
 npm run ganache-cli or npm run ganache-cli:mining or npm run ganache-cli:pm2
 ```
 
 Docker
-```
+
+```sh
 docker-compose up
 ```
 
 The Ganache blockchain will now run and it is available to deploy the corresponding Smart Contracts.
 
-
 ### 1.2. Deploying smart contracts
 
 To deploy all the contracts and start a local blockchain in pm2, execute
-```
+
+```sh
 npm run contracts:config
 ```
 
 To only deploy the contracts:
-```
+
+```sh
 npm run contracts:deploy
 ```
 
 To re-deploy the contracts:
-```
+
+```sh
 npm run contracts:redeploy
 ```
 
 If you want to deploy to other chain than local, use an appropriate script: `npm run contracts:*`. For more detailed setup refer to the contracts folders.
 
-The `contracts:create-config` will generate the files below and  copy the contract addresses to all other repositories.
+The `contracts:create-config` will generate the files below and copy the contract addresses to all other repositories.
 
 - `ui-config.json` - the configuration file for the [RIF Marketplace UI](https://github.com/rsksmart/rif-marketplace-ui). This contains information for all the networks which are deployed. This should be put in the `rif-marketplace-ui/src/ui-config.json`.
 - `cache-[network]-config.json` - Specific per network configuration file for the [RIF Marketplace Cache](https://github.com/rsksmart/rif-marketplace-cache) service. The configuration should be in `rif-marketplace-cache/config/local.json`.
@@ -119,7 +130,8 @@ The `contracts:create-config` will generate the files below and  copy the contra
 
 **Attention: the scripts automatically copy addresses to all repo folders. Don't push those files if you re-deployed locally with different addresses or if you deployed to a non-local chain as a non-release process.**
 
-### 1.2. Browser wallet
+### 1.3. Browser wallet
+
 In MetaMask or Nifty import the first address from `keys.txt` file. The private key is `0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d`
 
 Connect to the local ganache network (Localhost 8545 in the network dropdown). You should now see a balance of 99 ETH (or close to that - some gas was already used to deploy the Contracts)
@@ -134,49 +146,52 @@ For this setup you will need at least two running instances of **IPFS**. These c
 
 > The nodes are automatically started via the main setup. If you want to run them in the terminal or with pm2 on your own, execute the commands `npm run pinner:ipfs:*` from the `package.json`. For the detailed setup, please refer to the pinner repository.
 
-
 Download and setup the Pinning service
-```
-$ git clone git@github.com:rsksmart/rif-storage-pinner.git
-$ cd rif-storage-pinner
-$ npm ci
+
+```sh
+git clone git@github.com:rsksmart/rif-storage-pinner.git
+cd rif-storage-pinner
+npm ci
 ```
 
-Initialize development repos that are placed in `.repos`.  This folder can be anytime removed and the `init` command rerun. All data will be purged though.
-```
-$ npm run init
+Initialize development repos that are placed in `.repos`. This folder can be anytime removed and the `init` command rerun. All data will be purged though.
+
+```sh
+npm run init
 ```
 
 Spawn IPFS daemons
-```
-$ npm run ipfs:consumer daemon
-$ npm run ipfs:provider daemon
+
+```sh
+npm run ipfs:consumer daemon
+npm run ipfs:provider daemon
 ```
 
 You can use NPM's scripts `npm run ipfs:consumer` and `npm run ipfs:provider` to interact with each IPFS node. These take the same arguments as the `ipfs` command.
 
 You should now have two instances of **IPFS** running on ports `5002` and `5003`.
 
-
 ## 2. RIF Communications Pubsub Bootnode
 
 **Temprarily disabled and not downloaded. libp2p communication has been potsponed. Skip this paragraph.**
 
-
 Download and setup the RIF Communications Pubsub Bootnode
-```
+
+```sh
 git clone git@github.com:rsksmart/rif-communications-pubsub-bootnode.git
 
 cd rif-communications-pubsub-bootnode
 ```
 
 Install the dependencies
-```
+
+```sh
 npm ci
 ```
 
 Copy the `rooms` attribute from the configuration file generated in step [1.2](#1.2.Deploying-smart-contracts) from `rif-marketplace-dev/out/rooms-ganache.json`. Include this attribute in the `development.json5` file. It should look like:
-```
+
+```json
 {
   peerId: { ... },
   rooms: [ "8545:0xddb64fe46a91d46ee29420539fc25fd07c5fea3e:0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
@@ -187,19 +202,18 @@ Copy the `rooms` attribute from the configuration file generated in step [1.2](#
 ```
 
 Run the Pubsub Bootnode with
-```
+
+```sh
 NODE_ENV=development npm run start
 ```
-
 
 ## 3. RIF Marketplace Cache
 
 > Cache is automatically started via the main setup. If you want to run them in the terminal, execute `npm run cache` or with pm2 `npm run cache:start:pm2`. Other basic commands are available under `npm run cache:*`. For the detailed setup, please refer to the cache repository.
 
-
 Download and setup the RIF Marketplace Cache
 
-```
+```sh
 git clone git@github.com:rsksmart/rif-marketplace-cache.git
 
 cd rif-marketplace-cache
@@ -207,22 +221,25 @@ cd rif-marketplace-cache
 
 Install the dependencies
 
-```
+```sh
 npm ci
 ```
 
 Create the DB using the following command:
-```
+
+```sh
 npm run bin -- db-migration --up
 ```
 
 Run Precache process for the RNS Service (for ganache network)
-```
+
+```sh
 NODE_ENV=ganache npm run bin precache rns storage
 ```
 
 Run the cache for the RNS Service with
-```
+
+```sh
 NODE_ENV=ganache npm run bin -- start --enable rns storage --log=debug
 ```
 
@@ -230,37 +247,39 @@ NODE_ENV=ganache npm run bin -- start --enable rns storage --log=debug
 
 > Upload Service is automatically started via the main setup. If you want to run them in the terminal, execute `npm run upload-service` or with pm2 `npm run upload-service:start:pm2`. Other basic commands are available under `npm run upload-service:*`. For the detailed setup, please refer to the repository.
 
-
 Download and setup the RIF Marketplace Upload Service
-```
+
+```sh
 git clone git@github.com:rsksmart/rif-marketplace-upload-service.git
 
 cd rif-marketplace-upload-service
 ```
 
 Install the dependencies
-```
+
+```sh
 npm ci
 ```
 
 Create the DB using the following command:
-```
+
+```sh
 npm run bin -- db-migration --up
 ```
 
 Run Upload Service (connected to previously deployed IPFS node)
-```
+
+```sh
 NODE_ENV=development npm run bin start -- --log=debug
 ```
-
 
 ## 5. RIF Marketplace UI
 
 > UI is automatically started via the main setup. If you want to run them in the terminal, execute `npm run dapp` or with pm2 `npm run dapp:start:pm2`. For the detailed setup, please refer to the repository.
 
-
 Download and setup the RIF Marketplace UI
-```
+
+```sh
 git clone git@github.com:rsksmart/rif-marketplace-ui.git
 
 cd rif-marketplace-ui
@@ -268,23 +287,23 @@ cd rif-marketplace-ui
 
 Install the dependencies
 
-```
+```sh
 npm ci
 ```
 
-Run the UI (Will be available on http://localhost:3000/)
-```
+Run the UI (Will be available on `http://localhost:3000/`)
+
+```sh
 npm start
 ```
-
 
 ## 6. RNS Manager
 
 > RNS Manager is automatically started via the main setup. If you want to run them in the terminal, execute `npm run rns-manager` or with pm2 `npm run rns-manager:start:pm2`. For the detailed setup, please refer to the repository.
 
-
 Download and setup the RNS Manager
-```
+
+```sh
 git clone git@github.com:rnsdomains/rns-manager-react.git
 
 cd rns-manager-react
@@ -292,50 +311,48 @@ cd rns-manager-react
 
 Install the dependencies
 
-```
+```sh
 npm i
 ```
 
 Copy the configuration file generated in step [1.2](#1.2.Deploying-smart-contracts) from `rif-marketplace-dev/out/rnsAdmin-ganache-config.json` into `rns-manager-react/src/config/contracts.local.json`.
 
-Now you can start the UI (You may need to switch to another port such as http://localhost:3001 if you are already running the RIF Marketplace UI)
+Now you can start the UI (You may need to switch to another port such as `http://localhost:3001` if you are already running the RIF Marketplace UI)
 
-```
+```sh
 npm start
 ```
-
 
 ## 7. RIF Storage Pinning service
 
 > This is a service that listens on blockchain events and when new Agreement is created it pins a file to the configured IPFS node.
-
 > Pinner Service is automatically started via the main setup. If you want to run it in the terminal, execute `npm run pinner` or with pm2 `npm run pinner:start:pm2`. Other basic commands are available under `npm run pinner:*`. For the detailed setup, please refer to the repository.
 
-
 Download and setup the Pinning service (already done when running **IPFS** nodes)
-```
-$ git clone git@github.com:rsksmart/rif-storage-pinner.git
-$ cd rif-storage-pinner
-$ npm ci
+
+```sh
+git clone git@github.com:rsksmart/rif-storage-pinner.git
+cd rif-storage-pinner
+npm ci
 ```
 
 Make sure you have **IPFS** installed. We will use one of the previously deployed instances of **IPFS**.
 
 To interact with pinning service use the `npm run bin` script. To start Pinning service run:
 
-```
+```sh
 npm run bin -- init --offerId={your_account} --db=./db.sqlite
 ```
 
-This will provide the `peerId` that should be used in the *RIF Marketplace UI*  to create the Storage offer. You can create the offer on `http://localhost:3000/storage/sell?peerId={your_peer_id}`.
+This will provide the `peerId` that should be used in the _RIF Marketplace UI_ to create the Storage offer. You can create the offer on `http://localhost:3000/storage/sell?peerId={your_peer_id}`.
 
 Once the offer is created in the UI you can run the service using:
 
-```
+```sh
 NODE_ENV=ganache npm run bin daemon -- --log=debug --db=./db.sqlite
 ```
 
-You should see in logs when new Agreements are detected and pinned. 
+You should see in logs when new Agreements are detected and pinned.
 
 ## 8. RIF Notifier service
 
@@ -345,49 +362,53 @@ RIF Notifier is automatically started via the main setup. If you want to run it 
 
 Download and setup the rif-notifier service
 
-```
-$ git clone git@github.com:rsksmart/rif-notifier.git
-$ cd rif-notifier
+```sh
+git clone git@github.com:rsksmart/rif-notifier.git
+cd rif-notifier
 ```
 
 1. To install java, maven and mysql for first time run the script, and input password values when prompted for mysql. If you have already installed mysql, skip to step 3.
 
-```
-$ bin/meta-install.sh
-```
+   ```sh
+   bin/meta-install.sh
+   ```
 
 2. To secure the mysql installation for first time, run the script
 
-```
-$ bin/mysqlunattended.sh
-```
+   ```sh
+   bin/mysqlunattended.sh
+   ```
 
 3. For existing mysql installation, use the script to create notifier_user
-```
-$ bin/install.sh
-```
 
-4. Install notifier-prov-cli using steps in https://github.com/rsksmart/rif-notifier/tree/master/notifier-prov-cli
+   ```sh
+   bin/install.sh
+   ```
 
-5. To configure rif-notifier with other required parameters, see the help for command below. (Ensure all the required parameters are set. For sample configuration see ```config/config-ganache.json```)
+4. Install notifier-prov-cli using the steps [here](https://github.com/rsksmart/rif-notifier/tree/master/notifier-prov-cli)
 
-```
-notifier-prov-cli configure --help
-```
+5. To configure rif-notifier with other required parameters, see the help for command below. (Ensure all the required parameters are set. For sample configuration see `config/config-ganache.json`)
+
+   ```sh
+   notifier-prov-cli configure --help
+   ```
+
 6. To start rif-notifier
-``` 
-notifier-prov-cli start 
-```
+
+   ```sh
+   notifier-prov-cli start
+   ```
 
 In case of permission issues, run using `sudo`
 
-For more information about usage of rif-notifier see https://github.com/rsksmart/rif-notifier
+For more information about usage of rif-notifier see [its repository](https://github.com/rsksmart/rif-notifier)
 
 **See help pages for details on the parameters and additional commands!!!**
 
-# Using the RIF Marketplace
+## Using the RIF Marketplace
 
-## Registering domains using RNS
+### Registering domains using RNS
+
 Go through the normal RNS registration flow but each time you make transaction you need to create new block as it requires at least 1 confirmation. You can do that with:
 
 ```sh
@@ -396,8 +417,10 @@ sh forward.sh
 
 Alternatively, you can start a mining local blockchain with the command `npm run ganache-cli:mining`. It will mine a block every 15 seconds.
 
-# Troubleshooting
+## Troubleshooting
+
 ### RNS manager missmatch between networks
+
 Solution: switch back and forth a network on MetaMask/Nifty. If that does not work make sure you have setup correctly the network id in the RNS step.
 
 If you encounter more issues, please refer to the [Troubleshooting Guide](https://hackmd.io/@rsk-infra-protocols/HJeABR-T_)
