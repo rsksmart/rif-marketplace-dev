@@ -74,6 +74,7 @@ networks.forEach(network => {
       configTemplateJson = JSON.parse(fs.readFileSync(rifNotifierConfigFile));
       notifierConfig[network] && (configTemplateJson.notificationmanagercontract = notifierConfig[network].notifierManager)
       fs.writeFileSync(`./out/rif-notifier-${network}.json`, JSON.stringify(configTemplateJson, null, 4));
+      fs.writeFileSync(rifNotifierConfigFile, JSON.stringify(configTemplateJson, null, 4));
     }
   }
 
