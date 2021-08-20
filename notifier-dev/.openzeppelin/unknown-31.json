@@ -1,0 +1,146 @@
+{
+  "manifestVersion": "3.1",
+  "impls": {
+    "51792e0b10eeb78d9a99ed8af494eed88325cf21500b166c32c1a07c9c650939": {
+      "address": "0xA59966Be3C3d5e5B58F24fE30823687c5D7cfF4D",
+      "txHash": "0x9a083e86a67578bdca2a0bf2375cc45f180fe6c2054acd4335618b1eed31e2d4",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/Initializable.sol:25"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/Initializable.sol:30"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:20"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:74"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:28"
+          },
+          {
+            "contract": "PausableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol:96"
+          },
+          {
+            "contract": "NotifierManager",
+            "label": "isWhitelistedToken",
+            "type": "t_mapping(t_address,t_bool)",
+            "src": "../@rsksmart/rif-marketplace-notifier/contracts/NotifierManager.sol:22"
+          },
+          {
+            "contract": "NotifierManager",
+            "label": "isWhitelistedProvider",
+            "type": "t_mapping(t_address,t_bool)",
+            "src": "../@rsksmart/rif-marketplace-notifier/contracts/NotifierManager.sol:25"
+          },
+          {
+            "contract": "NotifierManager",
+            "label": "providerRegistry",
+            "type": "t_mapping(t_address,t_struct(Provider)1879_storage)",
+            "src": "../@rsksmart/rif-marketplace-notifier/contracts/NotifierManager.sol:28"
+          }
+        ],
+        "types": {
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_mapping(t_address,t_struct(Provider)1879_storage)": {
+            "label": "mapping(address => struct NotifierManager.Provider)"
+          },
+          "t_struct(Provider)1879_storage": {
+            "label": "struct NotifierManager.Provider",
+            "members": [
+              {
+                "label": "url",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "subscriptions",
+                "type": "t_mapping(t_bytes32,t_struct(Subscription)1888_storage)"
+              }
+            ]
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_mapping(t_bytes32,t_struct(Subscription)1888_storage)": {
+            "label": "mapping(bytes32 => struct NotifierManager.Subscription)"
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          },
+          "t_struct(Subscription)1888_storage": {
+            "label": "struct NotifierManager.Subscription",
+            "members": [
+              {
+                "label": "token",
+                "type": "t_address"
+              },
+              {
+                "label": "consumer",
+                "type": "t_address"
+              },
+              {
+                "label": "providerSignature",
+                "type": "t_bytes_storage"
+              },
+              {
+                "label": "balance",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_bytes_storage": {
+            "label": "bytes"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    }
+  },
+  "admin": {
+    "address": "0x4d4587109F20A35a2832e00CacA22F3a2895944E",
+    "txHash": "0x852ef68db2349d26ec8199a814c48af607ea26f8020db08eab4ca06d45c84e65"
+  }
+}
