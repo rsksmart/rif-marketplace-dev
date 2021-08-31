@@ -26,7 +26,7 @@ This project provides an easy to use developers environment for the **RIF Market
 
 ## Prerequisities
 
-0. node v10 (or [nvm](https://github.com/nvm-sh/nvm) or [n](https://github.com/tj/n) with node v10 installed (**to be upgraded**))
+0. node v10 (>= 10.18) (or [nvm](https://github.com/nvm-sh/nvm) or [n](https://github.com/tj/n) with node v10 installed (**to be upgraded**))
 1. [meta](https://github.com/mateodelnorte/meta) is used for bulk repo and tasks management. `npm i -g meta`
 2. [pm2](https://github.com/Unitech/pm2) is used for processes and logs management in the local environment. `npm i -g pm2`
 3. [IPFS](https://ipfs.io/) The recommended way to install IPFS is using [ipfs-update](https://github.com/ipfs/ipfs-update) but there are other ways described [here](https://github.com/ipfs/go-ipfs#install) as well. Recommended is to run the latest version but required is at least `0.7.0`. (used for the storage setup only)
