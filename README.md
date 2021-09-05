@@ -4,25 +4,30 @@ This project provides an easy to use developers environment for the **RIF Market
 
 ## Table of content
 
-- [Prerequisities](#prerequisities)
-- [Part of tutorial](#part-of-tutorial)
-- [Quick Start](#quick-start)
-- [Detailed Setup](#detailed-setup)
-  1. [Developers Environment](#developers-environment)
-     1. [Starting local blockchain](#11-starting-local-blockchain)
-     2. [Deploying smart contracts](#12-deploying-smart-contracts)
-     3. [Browser wallet](#13-browser-wallet)
-     4. [IPFS Nodes](#14-ipfs-nodes)
-  2. [RIF Communications Pubsub BootNode](#2-rif-communications-pubsub-bootnode)
-  3. [RIF Marketplace Cache](#3-rif-marketplace-cache)
-  4. [RIF Marketplace Upload Service](#4-rif-marketplace-upload-service)
-  5. [RIF Marketplace UI](#5-rif-marketplace-ui)
-  6. [RNS Manager](#6-rns-manager)
-  7. [RIF Storage Pinning service](#7-rif-storage-pinning-service)
-  8. [RIF Notifier Service](#8-rif-notifier-service)
-- Using the RIF Marketplace
-  - [Registering domains using RNS](#registering-domains-using-rns)
-- [Troubleshooting](#troubleshooting)
+- [RIF Marketplace developers guide](#rif-marketplace-developers-guide)
+  - [Table of content](#table-of-content)
+  - [Prerequisities](#prerequisities)
+  - [Part of tutorial](#part-of-tutorial)
+  - [Quick Start](#quick-start)
+  - [Detailed Setup](#detailed-setup)
+  - [1. Developers Environment](#1-developers-environment)
+    - [1.1. Starting local blockchain](#11-starting-local-blockchain)
+    - [1.2. Deploying smart contracts](#12-deploying-smart-contracts)
+    - [1.3. Browser wallet](#13-browser-wallet)
+    - [1.4. IPFS Nodes](#14-ipfs-nodes)
+  - [2. RIF Communications Pubsub Bootnode](#2-rif-communications-pubsub-bootnode)
+  - [3. RIF Marketplace Cache](#3-rif-marketplace-cache)
+  - [4. RIF Marketplace Upload Service](#4-rif-marketplace-upload-service)
+  - [5. RIF Marketplace UI](#5-rif-marketplace-ui)
+  - [6. RNS Manager](#6-rns-manager)
+  - [7. RIF Storage Pinning service](#7-rif-storage-pinning-service)
+  - [8. RIF Notifier service](#8-rif-notifier-service)
+  - [Using the RIF Marketplace](#using-the-rif-marketplace)
+    - [Registering domains using RNS](#registering-domains-using-rns)
+  - [Dev Envirionment](#dev-envirionment)
+    - [Contracts Methods Execution, Access to dRBTC](#contracts-methods-execution-access-to-drbtc)
+  - [Troubleshooting](#troubleshooting)
+    - [RNS manager missmatch between networks](#rns-manager-missmatch-between-networks)
 
 ## Prerequisities
 
@@ -416,6 +421,23 @@ sh forward.sh
 ```
 
 Alternatively, you can start a mining local blockchain with the command `npm run ganache-cli:mining`. It will mine a block every 15 seconds.
+
+## Dev Envirionment
+
+### Contracts Methods Execution, Access to dRBTC
+
+The devnet contracts are owned by the wallet of rskj clinet running on the cache dev infrastructure node. To perform any actions with the contracts on the dev environment:
+
+To pefrorm any operations like deployment, contracts call:
+
+1. Start a script from the root of the rif-marketplace-dev: `./proxy-dev-node.sh`
+2. Connect to the node from any contract folder (rns-dev, storage-dev, notifier-dev) with `npx truffle --network rskdevnet`
+
+If you want to receive the full list of accounts without truffle connection, execute:
+
+```sh
+curl http://localhost:4444 -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1}'
+```
 
 ## Troubleshooting
 
