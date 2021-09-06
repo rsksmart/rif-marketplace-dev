@@ -426,7 +426,7 @@ Alternatively, you can start a mining local blockchain with the command `npm run
 
 ### Contracts Methods Execution, Access to dRBTC
 
-The devnet contracts are owned by the wallet of rskj clinet running on the cache dev infrastructure node.
+The devnet contracts are owned by the wallet of rskj client running on the cache dev infrastructure node.
 
 To pefrorm any operations like deployment, contracts call:
 
