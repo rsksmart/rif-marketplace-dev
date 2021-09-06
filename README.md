@@ -27,7 +27,7 @@ This project provides an easy to use developers environment for the **RIF Market
   - [Dev Envirionment](#dev-envirionment)
     - [Contracts Methods Execution, Access to dRBTC](#contracts-methods-execution-access-to-drbtc)
   - [Troubleshooting](#troubleshooting)
-    - [RNS manager missmatch between networks](#rns-manager-missmatch-between-networks)
+    - [RNS manager mismatch between networks](#rns-manager-mismatch-between-networks)
 
 ## Prerequisities
 
@@ -441,7 +441,7 @@ curl http://localhost:4444 -X POST -H "Content-Type: application/json" --data '{
 
 ## Troubleshooting
 
-### RNS manager missmatch between networks
+### RNS manager mismatch between networks
 
 Solution: switch back and forth a network on MetaMask/Nifty. If that does not work make sure you have setup correctly the network id in the RNS step.
 
