@@ -31,6 +31,6 @@
   "devDependencies": {
     "@truffle/hdwallet-provider": "1.2.3",
     "@openzeppelin/truffle-upgrades": "^1.4.0",
-    "truffle": "^5.1.66"
+    "truffle": "^5.7.1"
   }
 }
