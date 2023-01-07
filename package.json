@@ -89,6 +89,6 @@
     "meta-npm": "^1.2.7"
   },
   "dependencies": {
-    "json5": "^2.2.0"
+    "json5": "^2.2.2"
   }
 }
